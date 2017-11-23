@@ -1,0 +1,3 @@
+bw_recette_homepage:
+    path:     /
+    defaults: { _controller: BWRecetteBundle:Default:index }
