@@ -2,11 +2,9 @@ bw_recette:
     resource: "@BWRecetteBundle/Resources/config/routing.yml"
     prefix:   /
 
+bw_recette:
+  resource: "@BWRecetteBundle/Resources/config/routing.yml"
+  prefix: /
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
-
-home:
-    path: /accueil
-    defaults:
-      _controller:
