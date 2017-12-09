@@ -18,10 +18,38 @@ class Utilisateur extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $prenom;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+    }
+
+    public function getNom(){
+        return $this->nom;
+    }
+
+    public function setNom($content){
+        $this->nom = $content;
+
+        return $this;
+    }
+
+    public function getPrenom(){
+        return $this->prenom;
+    }
+
+    public function setPrenom($content){
+        $this->prenom = $content;
+
+        return $this;
     }
 }

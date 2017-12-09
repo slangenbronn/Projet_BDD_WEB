@@ -78,3 +78,6 @@ fos_user:
     from_email:
         address: florian.guillemeau@gmail.com #"%mailer_user%"
         sender_name: florian #"%mailer_user%"
+    registration:
+        form:
+            type: BW\UtilisateurBundle\Form\RegistrationType
