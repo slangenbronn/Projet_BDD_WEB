@@ -1,3 +1,7 @@
 bw_utilisateur_homepage:
     path:     /
-    defaults: { _controller: BWUtilisateurBundle:Default:index }
+    defaults: { _controller: BWUtilisateurBundle:Utilisateur:index }
+
+bw_utilisateur_antoine:
+    path:     /antoine
+    defaults: { _controller: BWUtilisateurBundle:Utilisateur:login }
