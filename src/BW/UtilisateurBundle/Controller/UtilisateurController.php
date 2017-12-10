@@ -9,12 +9,4 @@ class UtilisateurController extends Controller{
 	public function indexAction(){
         return $this->render('BWUtilisateurBundle:Utilisateur:utilisateur.html.twig');
     }
-
-    /*public function loginAction(){
-    	return $this->render('BWUtilisateurBundle:Security:login.html.twig');
-    }*/
-    // signin
-    // signup
-    // logout
-    // 
 }

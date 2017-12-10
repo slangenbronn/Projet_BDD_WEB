@@ -1,0 +1,54 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Bienvenu administrateur</h1>
+			{% if tabUti is not null %}
+				<table>
+					<thead>
+						<tr>
+							<td>Id</td>
+							<td>Username</td>
+							<td>Prenom</td>
+							<td>Nom</td>
+							<td>Rôle</td>
+							<td>Modifier</td>
+							<td>Supprimer</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for utilisateur in tabUti %}
+							<tr>
+								<td>{{utilisateur.id}}</td>
+								<td>{{utilisateur.username }}</td>
+								<td>{{utilisateur.prenom }}</td>
+								<td>{{utilisateur.nom}}</td>
+								<td>
+									{% for role in utilisateur.roles %}
+										{{role}}{% if not loop.last %},{% endif %}
+									{% endfor %}
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			{% else %}
+				<p>Aucun utilisateur dans la base de données</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

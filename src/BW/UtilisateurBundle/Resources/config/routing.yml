@@ -2,6 +2,6 @@ bw_utilisateur_homepage:
     path:     /
     defaults: { _controller: BWUtilisateurBundle:Utilisateur:index }
 
-bw_utilisateur_antoine:
-    path:     /antoine
-    defaults: { _controller: BWUtilisateurBundle:Utilisateur:login }
+bw_admin_homepage:
+    path:     /admin
+    defaults: { _controller: BWUtilisateurBundle:Admin:index }
