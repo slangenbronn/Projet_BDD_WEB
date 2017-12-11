@@ -1,0 +1,37 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<form action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post" class="form-signin">
+        <div class="login-container">
+            <h1>Modification d'un utilisateur</h1><br>
+            <form>
+           		<label for="id">Id : {{ utilisateur.id }}</label>
+           		<input type="text" id="id" name="_id" value="{{ utilisateur.id }}" class="input_disabled", disabled="disabled">
+            	<label for="email">Email</label>
+        		<input type="text" id="email" name="_email" value="{{utilisateur.email}}">
+                <label for="username">username</label>
+                <input type="text" id="username" name="_username" value="{{ utilisateur.username }}"/>
+                <label for="password">password</label>
+                <input type="password" id="password" name="_password"/>
+                <label for="nom">nom</label>
+                <input type="text" id="nom" name="_nom" value="{{ utilisateur.nom }}" required="required" />
+                <label for="prenom">prenom</label>
+                <input type="text" id="prenom" name="_prenom" value="{{ utilisateur.prenom }}" required="required" />
+
+                role ?
+
+                <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Modifier" />
+            </form>
+        </div>
+    </form>
+{% endblock %}

@@ -3,6 +3,8 @@
 {% block title %}Accueil administrateur{% endblock %}
 {% block stylesheet %}
 <link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+
 {% endblock %}
 
 {% block nav %}
@@ -39,8 +41,8 @@
 										{{role}}{% if not loop.last %},{% endif %}
 									{% endfor %}
 								</td>
-								<td></td>
-								<td></td>
+								<td><a href="{{path('bw_admin_modifier_uti', {'id': utilisateur.id})}}">Modifier</a></td>
+								<td><button onclick="alertSupprimer({{utilisateur.id}}, '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')">Supprimer</button></td>
 							</tr>
 						{% endfor %}
 					</tbody>	
@@ -51,4 +53,13 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+	<script src="{{asset('bundles/Utilisateur/js/index.js')}}"></script>
 {% endblock %}

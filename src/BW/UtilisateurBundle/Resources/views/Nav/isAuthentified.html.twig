@@ -2,5 +2,6 @@
 	<p>Welcome <b>{{ app.user.username }}</b></p>
 	<p><a href="{{ path('fos_user_security_logout') }}">Logout</a></p>
 {% else %}
-	<a href="{{ path('fos_user_security_login') }}">Login</a>
+	<p><a href="{{ path('fos_user_security_login') }}">Login</a> ou <a href="{{ path('fos_user_registration_register') }}">register</a>
+	</p>
 {%endif%}
