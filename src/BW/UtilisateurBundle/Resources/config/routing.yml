@@ -1,0 +1,19 @@
+bw_utilisateur_homepage:
+    path:     /
+    defaults: { _controller: BWUtilisateurBundle:Utilisateur:index }
+
+bw_admin_homepage:
+    path:     /admin
+    defaults: { _controller: BWUtilisateurBundle:Admin:index }
+
+bw_admin_modifier_uti:
+    path:     /admin/modifier/{id}
+    defaults: { _controller: BWUtilisateurBundle:Admin:modifierUtilisateur }
+
+bw_admin_modification_uti:
+    path:     /admin/modification/utilisateur
+    defaults: { _controller: BWUtilisateurBundle:Admin:modificationUtilisateur }
+
+bw_admin_suppression_uti:
+    path:     /admin/suppression/utilisateur
+    defaults: { _controller: BWUtilisateurBundle:Admin:suppressionUtilisateur }

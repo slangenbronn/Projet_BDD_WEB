@@ -1,0 +1,61 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+	<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+	<!-- Select2 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+	<div action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post" class="form-signin">
+        <div class="login-container">
+            <h1>Modification d'un utilisateur</h1><br>
+            <form>
+           		<label for="id">Id : {{ utilisateur.id }}</label>
+           		<input type="text" id="id" name="_id" value="{{ utilisateur.id }}" class="input_disabled", disabled="disabled">
+            	<label for="email">Email</label>
+        		<input type="text" id="email" name="_email" value="{{utilisateur.email}}">
+                <label for="username">username</label>
+                <input type="text" id="username" name="_username" value="{{ utilisateur.username }}"/>
+                <label for="password">password</label>
+                <input type="password" id="password" name="_password"/>
+                <label for="nom">nom</label>
+                <input type="text" id="nom" name="_nom" value="{{ utilisateur.nom }}" required="required" />
+                <label for="prenom">prenom</label>
+                <input type="text" id="prenom" name="_prenom" value="{{ utilisateur.prenom }}" required="required" />
+
+                <label for="role">rôle</label>
+                <select class="js-example-basic-single" name="state">
+		        	<option value="AL">Alabama</option>
+		        	<option value="WY">Wyoming</option>
+		        </select>
+		        <br>
+
+                <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Modifier" />
+            </form>
+            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Supprimer" onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')"/>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="{{asset('bundles/Utilisateur/js/modifierUtilisateur.js')}}"></script>
+
+	<!-- Select2 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({ width: '100%'});
+        });
+    </script>
+{% endblock %}
