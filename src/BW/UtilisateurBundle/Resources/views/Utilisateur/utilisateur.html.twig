@@ -1,0 +1,26 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Bienvenue</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>Je suis du contenue :D</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

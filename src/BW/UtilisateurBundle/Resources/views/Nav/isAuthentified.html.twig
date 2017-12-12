@@ -1,0 +1,7 @@
+{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+	<p>Welcome <b>{{ app.user.username }}</b></p>
+	<button  href="{{ path('fos_user_security_logout') }}" class="w3-button w3-white width-100">Logout</button>
+{% else %}
+	<p><a href="{{ path('fos_user_security_login') }}">Login</a> ou <a href="{{ path('fos_user_registration_register') }}">register</a>
+	</p>
+{%endif%}
