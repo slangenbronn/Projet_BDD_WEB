@@ -2,8 +2,10 @@
 
 {% block title %}Accueil administrateur{% endblock %}
 {% block stylesheet %}
-<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
-<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+	<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+	<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+	<!-- Select2 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 
 {% block nav %}
@@ -11,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<form action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post" class="form-signin">
+	<div action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post" class="form-signin">
         <div class="login-container">
             <h1>Modification d'un utilisateur</h1><br>
             <form>
@@ -28,10 +30,32 @@
                 <label for="prenom">prenom</label>
                 <input type="text" id="prenom" name="_prenom" value="{{ utilisateur.prenom }}" required="required" />
 
-                role ?
+                <label for="role">rôle</label>
+                <select class="js-example-basic-single" name="state">
+		        	<option value="AL">Alabama</option>
+		        	<option value="WY">Wyoming</option>
+		        </select>
+		        <br>
 
                 <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Modifier" />
             </form>
+            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Supprimer" onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')"/>
         </div>
-    </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="{{asset('bundles/Utilisateur/js/modifierUtilisateur.js')}}"></script>
+
+	<!-- Select2 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({ width: '100%'});
+        });
+    </script>
 {% endblock %}

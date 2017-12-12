@@ -1,12 +1,14 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-2">Lien 1</div>
-		<div class="col-md-2">Lien 2</div>
-		<div class="col-md-2">Lien 3</div>
-		<div class="col-md-2">Lien 4</div>
-		<div class="col-md-2">Lien 5</div>
-		<div class="col-md-2">
-		{% block isAuthenfied %}{{ include("BWUtilisateurBundle:Nav:isAuthentified.html.twig") }}{% endblock %}
+<div class="w3-section w3-bottombar w3-padding-10">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 1</button></div>
+			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 2</button></div>
+			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 3</button></div>
+			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 4</button></div>
+			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 5</button></div>
+			<div class="col-md-2">
+			{% block isAuthenfied %}{{ include("BWUtilisateurBundle:Nav:isAuthentified.html.twig") }}{% endblock %}
+			</div>
 		</div>
 	</div>
 </div>

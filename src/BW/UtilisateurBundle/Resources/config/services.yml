@@ -1,7 +1,4 @@
 services:
-#    bw_utilisateur.example:
-#        class: BW\UtilisateurBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
     utilisateur.form.registration:
         class: BW\UtilisateurBundle\Form\RegistrationType
         tags:
