@@ -1,0 +1,39 @@
+BW\RecetteBundle\Entity\Image:
+    type: entity
+    table: image
+    indexes:
+        FK_image_idrecette:
+            columns:
+                - idrecette
+        idimage:
+            columns:
+                - idimage
+    uniqueConstraints:
+        idimage_2:
+            columns:
+                - idimage
+        idimage_3:
+            columns:
+                - idimage
+    id:
+        idimage:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        lieni:
+            type: string
+            nullable: true
+            length: 250
+            options:
+                fixed: false
+        idrecette:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

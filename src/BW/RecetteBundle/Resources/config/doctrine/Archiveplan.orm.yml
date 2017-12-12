@@ -1,0 +1,39 @@
+BW\RecetteBundle\Entity\Archiveplan:
+    type: entity
+    table: archiveplan
+    indexes:
+        FK_archivplan_login:
+            columns:
+                - login
+        FK_archivplan_idrecette:
+            columns:
+                - idrecette
+    uniqueConstraints:
+        idarchivplan:
+            columns:
+                - idarchivplan
+    id:
+        idarchivplan:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        dateap:
+            type: date
+            nullable: true
+        idrecette:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        login:
+            type: string
+            nullable: true
+            length: 25
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

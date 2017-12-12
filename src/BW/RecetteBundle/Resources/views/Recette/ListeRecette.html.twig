@@ -1,0 +1,16 @@
+<html>
+  <ul>
+    {%for recette in recette %}
+      <!--Ajouter du code php pour les entête lettré-->
+      <a href="{{ path('bw_recette_id', {'idRecette': recette.idRecette}) }}">
+        {{recette.nom}} Par {{ recette.login }}
+      </a>
+      <br>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ path('bw_creer_recette') }}">
+    <i class="glyphicon glyphicon-chevron-left"></i>
+    Creer une recette
+  </a>
+</html>

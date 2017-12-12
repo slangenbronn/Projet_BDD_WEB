@@ -1,0 +1,22 @@
+BW\RecetteBundle\Entity\Suit:
+    type: entity
+    table: suit
+    indexes:
+        FK_suit_login:
+            columns:
+                - login
+    id:
+        idregime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+        login:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            id: true
+    lifecycleCallbacks: {  }

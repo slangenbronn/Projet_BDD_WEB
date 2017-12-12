@@ -1,0 +1,42 @@
+<?php
+
+namespace BW\RecetteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Archiveachat
+ *
+ * @ORM\Table(name="archiveachat", uniqueConstraints={@ORM\UniqueConstraint(name="idarchivplan", columns={"idarchivplan"})}, indexes={@ORM\Index(name="FK_archiveachat_idingredient", columns={"idingredient"})})
+ * @ORM\Entity
+ */
+class Archiveachat
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idarchivplan", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idarchivplan;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idingredient", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idingredient;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datea", type="date", nullable=true)
+     */
+    private $datea;
+
+
+}
+

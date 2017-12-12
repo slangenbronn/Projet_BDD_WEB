@@ -1,0 +1,110 @@
+<?php
+
+namespace BW\RecetteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Recette
+ *
+ * @ORM\Table(name="recette", uniqueConstraints={@ORM\UniqueConstraint(name="idrecette", columns={"idrecette"}), @ORM\UniqueConstraint(name="idrecette_3", columns={"idrecette"})}, indexes={@ORM\Index(name="FK_recette_login", columns={"login"}), @ORM\Index(name="idrecette_2", columns={"idrecette"})})
+ * @ORM\Entity
+ */
+class Recette
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idrecette", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idrecette;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=250, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="difficulte", type="string", length=25, nullable=false)
+     */
+    private $difficulte;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=false)
+     */
+    private $prix;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombrepersonne", type="integer", nullable=false)
+     */
+    private $nombrepersonne;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="duree", type="integer", nullable=false)
+     */
+    private $duree;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=25, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calories", type="integer", nullable=true)
+     */
+    private $calories;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="glucide", type="integer", nullable=true)
+     */
+    private $glucide;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lipide", type="integer", nullable=true)
+     */
+    private $lipide;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="proteines", type="integer", nullable=true)
+     */
+    private $proteines;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="selmineraux", type="integer", nullable=true)
+     */
+    private $selmineraux;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     */
+    private $login;
+
+
+}
+

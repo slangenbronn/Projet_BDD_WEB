@@ -1,0 +1,32 @@
+BW\RecetteBundle\Entity\Quantite:
+    type: entity
+    table: quantite
+    indexes:
+        FK_quantite_idingredient:
+            columns:
+                - idingredient
+    id:
+        idrecette:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+        idingredient:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+    fields:
+        quantiteing:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        calories:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

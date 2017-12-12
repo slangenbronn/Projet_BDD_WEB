@@ -1,0 +1,45 @@
+BW\RecetteBundle\Entity\Planning:
+    type: entity
+    table: planning
+    indexes:
+        FK_planning_login:
+            columns:
+                - login
+        FK_planning_idrecette:
+            columns:
+                - idrecette
+        idplan:
+            columns:
+                - idplan
+    uniqueConstraints:
+        idplan_2:
+            columns:
+                - idplan
+        idplan_3:
+            columns:
+                - idplan
+    id:
+        idplan:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        datep:
+            type: date
+            nullable: true
+        login:
+            type: string
+            nullable: true
+            length: 25
+            options:
+                fixed: false
+        idrecette:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

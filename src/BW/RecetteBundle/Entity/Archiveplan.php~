@@ -1,0 +1,47 @@
+<?php
+
+namespace BW\RecetteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Archiveplan
+ *
+ * @ORM\Table(name="archiveplan", uniqueConstraints={@ORM\UniqueConstraint(name="idarchivplan", columns={"idarchivplan"})}, indexes={@ORM\Index(name="FK_archivplan_login", columns={"login"}), @ORM\Index(name="FK_archivplan_idrecette", columns={"idrecette"})})
+ * @ORM\Entity
+ */
+class Archiveplan
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idarchivplan", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idarchivplan;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateap", type="date", nullable=true)
+     */
+    private $dateap;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idrecette", type="integer", nullable=true)
+     */
+    private $idrecette;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     */
+    private $login;
+
+
+}
+

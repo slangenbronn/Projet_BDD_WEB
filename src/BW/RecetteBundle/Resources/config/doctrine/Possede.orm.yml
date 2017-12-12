@@ -1,0 +1,22 @@
+BW\RecetteBundle\Entity\Possede:
+    type: entity
+    table: possede
+    indexes:
+        FK_possede_idingredient:
+            columns:
+                - idingredient
+    id:
+        login:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            id: true
+        idingredient:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+    lifecycleCallbacks: {  }

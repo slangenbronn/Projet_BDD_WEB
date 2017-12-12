@@ -1,0 +1,49 @@
+<?php
+
+namespace BW\RecetteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Quantite
+ *
+ * @ORM\Table(name="quantite", indexes={@ORM\Index(name="FK_quantite_idingredient", columns={"idingredient"})})
+ * @ORM\Entity
+ */
+class Quantite
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idrecette", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idrecette;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idingredient", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idingredient;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="quantiteing", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $quantiteing;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calories", type="integer", nullable=true)
+     */
+    private $calories;
+
+
+}
+

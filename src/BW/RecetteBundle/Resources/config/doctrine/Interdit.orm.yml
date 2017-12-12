@@ -1,0 +1,21 @@
+BW\RecetteBundle\Entity\Interdit:
+    type: entity
+    table: interdit
+    indexes:
+        FK_interdit_idrecette:
+            columns:
+                - idrecette
+    id:
+        idregime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+        idrecette:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+    lifecycleCallbacks: {  }

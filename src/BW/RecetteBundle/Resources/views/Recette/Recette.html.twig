@@ -1,0 +1,25 @@
+<html>
+  <ul>
+    <h1>{{recette.nom}}</h1>
+    <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
+    <p> Recette de {{recette.login}}</p>
+
+    <h2> Les ingrédients : </h2>
+    {%for liste in l_ing%}
+      <h3>{{liste.nomi}} </h3>
+    {% endfor %}
+
+    {%for etape in etape %}
+      <h3> Etape {{etape.idetape}}</h3>
+      <p>{{etape.descriptione}}</p>
+      <br>
+    {% endfor %}
+
+    <p>
+    <a href="{{ path('bw_recette_homepage') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour
+    </a>
+  </p>
+  </ul>
+</html>
