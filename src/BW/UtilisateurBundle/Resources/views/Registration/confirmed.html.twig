@@ -1,10 +1,25 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}
+{% block title %}Confirmation d'enregistrement{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+	<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+	<!-- Select2 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<h1>Bienvenue</h1>
+			<p>Vous bien enregistrer {{user.username}}!</p>
+			<button class="w3-button w3-white width-100" onclick="redirect('{{path('bw_utilisateur_homepage')}}')">Menu principal</button>
+		</div>
+	</div>
+{% endblock %}

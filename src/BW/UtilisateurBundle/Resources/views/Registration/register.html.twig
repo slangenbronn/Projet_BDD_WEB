@@ -1,7 +1,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% extends "::base.html.twig" %}
+{% extends "::layout.html.twig" %}
 
-{% block fos_user_content %}
+{% block title %}Register{% endblock %}
 
-{% include "@FOSUser/Registration/register_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+    <link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block nav %}
+    {{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+	{% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock content %}

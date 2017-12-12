@@ -16,16 +16,16 @@
 		<div class="col-md-12">
 			<h1>Bienvenu administrateur</h1>
 			{% if tabUti is not null %}
-				<table>
+				<table id="tableau">
 					<thead>
 						<tr>
-							<td>Id</td>
-							<td>Username</td>
-							<td>Prenom</td>
-							<td>Nom</td>
-							<td>Rôle</td>
-							<td>Modifier</td>
-							<td>Supprimer</td>
+							<th>Id</th>
+							<th>Username</th>
+							<th>Prenom</th>
+							<th>Nom</th>
+							<th>Rôle</th>
+							<th>Modifier</th>
+							<th>Supprimer</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,8 +40,8 @@
 										{{role}}{% if not loop.last %},{% endif %}
 									{% endfor %}
 								</td>
-								<td><a href="{{path('bw_admin_modifier_uti', {'id': utilisateur.id})}}">Modifier</a></td>
-								<td><button onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')">Supprimer</button></td>
+								<td><button onclick="redirect('{{path('bw_admin_modifier_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Modifier</button></td>
+								<td><button onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Supprimer</button></td>
 							</tr>
 						{% endfor %}
 					</tbody>	

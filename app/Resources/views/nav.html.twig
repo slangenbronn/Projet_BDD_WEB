@@ -5,7 +5,11 @@
 			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 2</button></div>
 			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 3</button></div>
 			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 4</button></div>
-			<div class="col-md-2"><button class="w3-button w3-white width-100">Lien 5</button></div>
+			{% if is_granted("ROLE_ADMIN") %}
+				<div class="col-md-2">
+					{{ include("BWUtilisateurBundle:Nav:adminNav.html.twig") }}			
+				</div>
+			{%endif%}
 			<div class="col-md-2">
 			{% block isAuthenfied %}{{ include("BWUtilisateurBundle:Nav:isAuthentified.html.twig") }}{% endblock %}
 			</div>
