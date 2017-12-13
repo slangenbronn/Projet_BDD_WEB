@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Doctrine\ORM\EntityRepository;
+
 
 class RecetteController extends Controller
 {
@@ -23,8 +25,26 @@ class RecetteController extends Controller
       ->getRepository('BWRecetteBundle:Recette')
     ;
 
+    $Imagerepository = $this->getDoctrine()
+      ->getRepository('BWRecetteBundle:Image')
+    ;
+
     $recette = $Recetterepository->findAll();
-    return $this->render('BWRecetteBundle:Recette:ListeRecette.html.twig', array('recette' => $recette));
+    $image = $Imagerepository->findAll();
+    $liste_i = array();
+    foreach($recette as $r){
+      foreach($image as $i){
+        if($i->getidrecette() == $r->getidrecette())
+          $liste_i[] = $i;
+      }
+    }
+
+    $count = count($recette);
+
+    return $this->render('BWRecetteBundle:Recette:ListeRecette.html.twig', array(
+      'recette' => $recette,
+      'image' => $liste_i,
+      'count' => $count));
   }
 
   public function detailAction($idRecette)
@@ -44,16 +64,31 @@ class RecetteController extends Controller
     $Ingredientrepository = $this->getDoctrine()
       ->getRepository('BWRecetteBundle:Ingredient')
     ;
+
+    $Imagerepository = $this->getDoctrine()
+      ->getRepository('BWRecetteBundle:Image')
+    ;
     $liste_id = array();
     $recette = $Recetterepository->find($idRecette);
     $etape = $Etaperepository->findBy(array('idrecette' => $idRecette));
     $quantite = $Quantiterepository->findBy(array('idrecette' => $idRecette));
+    $image = $Imagerepository->findOneBy(array('idrecette' => $idRecette));
+
     foreach($quantite as $l){
       $liste_id[] = $l->getIdingredient();
     }
+
+    $count = count($liste_id);
+
     $liste_ing = $Ingredientrepository->findBy(array('idingredient' => $liste_id));
 
-    return $this->render('BWRecetteBundle:Recette:Recette.html.twig', array('recette' => $recette, 'etape' => $etape, 'quantite' => $quantite, 'l_ing' => $liste_ing));
+    return $this->render('BWRecetteBundle:Recette:Recette.html.twig', array(
+      'recette' => $recette,
+      'etape' => $etape,
+      'quantite' => $quantite,
+      'l_ing' => $liste_ing,
+      'count' => $count,
+      'image' => $image));
   }
 
   public function creerAction(Request $request)

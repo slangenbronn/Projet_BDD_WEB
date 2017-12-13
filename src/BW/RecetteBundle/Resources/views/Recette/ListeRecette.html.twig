@@ -1,16 +1,38 @@
-<html>
-  <ul>
-    {%for recette in recette %}
-      <!--Ajouter du code php pour les entête lettré-->
-      <a href="{{ path('bw_recette_id', {'idRecette': recette.idRecette}) }}">
-        {{recette.nom}} Par {{ recette.login }}
-      </a>
+{% extends "::layout.html.twig" %}
+{% block nav%}
+ {{include ("::nav.html.twig")}}
+{% endblock nav %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Recettes</h1>
+    </div>
+  </div>
+        {%for i in 0..count-1 %}
+        <a   href="{{ path('bw_recette_id', {'idRecette': recette[i].idRecette}) }}">
+        <div class="w3-row-padding">
+          <div class="w3-third w3-container w3-margin-bottom">
+              <img src="{{asset(image[i].lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+            </a>
+              <br>
+              <p><b>{{recette[i].nom}}</b></p>
+              <p>{{recette[i].description}}</p>
+            </div>
+          </div>
+        </div>
+          <br>
+        {% endfor %}
+      </u>
       <br>
-    {% endfor %}
-  </ul>
+      <a href="{{ path('bw_utilisateur_homepage') }}">
+        <i class="btn btn-default btn-lg">Home</i>
+      </a>
+    </div>
+  </div>
+</div>
 
-  <a href="{{ path('bw_creer_recette') }}">
-    <i class="glyphicon glyphicon-chevron-left"></i>
-    Creer une recette
-  </a>
-</html>
+
+
+{% endblock content %}

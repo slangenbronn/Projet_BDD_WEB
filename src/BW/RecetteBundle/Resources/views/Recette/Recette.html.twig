@@ -1,19 +1,40 @@
-<html>
-  <ul>
+{% extends "::layout.html.twig" %}
+{% block nav%}
+ {{include ("::nav.html.twig")}}
+{% endblock nav %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <div class="w3-third w3-container w3-margin-bottom">
+    <img src="{{asset(image.lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+    </div>
     <h1>{{recette.nom}}</h1>
     <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
     <p> Recette de {{recette.login}}</p>
-
+    <br>
+    <div class="w3-row-padding">
     <h2> Les ingrédients : </h2>
-    {%for liste in l_ing%}
-      <h3>{{liste.nomi}} </h3>
+    <div class="w3-row-padding">
+    {%for i in 0..count-1 %}
+      <p> {{quantite[i].quantiteing}} {{l_ing[i].typemesure}} de {{l_ing[i].nomi}}</p>
     {% endfor %}
+  </div>
 
+    </div>
+    <br>
+    <div class="w3-row-padding">
+    <h2> Les étapes de préparations : </h2>
+    <div class="w3-row-padding">
     {%for etape in etape %}
       <h3> Etape {{etape.idetape}}</h3>
+      <p>{{etape.dureee}} min</p>
       <p>{{etape.descriptione}}</p>
       <br>
     {% endfor %}
+  </div>
+
+    </div>
 
     <p>
     <a href="{{ path('bw_recette_homepage') }}" class="btn btn-default">
@@ -21,5 +42,9 @@
       Retour
     </a>
   </p>
-  </ul>
-</html>
+</div>
+</div>
+</div>
+
+
+  {% endblock content %}
