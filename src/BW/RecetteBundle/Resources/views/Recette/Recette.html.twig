@@ -11,15 +11,21 @@
     </div>
     <h1>{{recette.nom}}</h1>
     <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
-    <p> Recette de {{user.username}}</p>
+    {% if user is not null %}
+      <p> Recette de {{user.username}}</p>
+    {% endif %}
     <p> Prix approximatif : {{recette.prix}} </p>
     <br>
     <div class="w3-row-padding">
     <h2> Les ingrédients : </h2>
     <div class="w3-row-padding">
-    {%for i in 0..count-1 %}
-      <p> {{quantite[i].quantiteing}} {{l_ing[i].typemesure}} de {{l_ing[i].nomi}}</p>
-    {% endfor %}
+    {% if count > 0 %}
+      {%for i in 0..count-1 %}
+        <p> {{quantite[i].quantiteing}} {{l_ing[i].typemesure}} de {{l_ing[i].nomi}}</p>
+     {% endfor %}
+    {% else %}
+      <p>Aucun ingrédient</p>
+    {% endif %}
   </div>
 
     </div>
@@ -32,6 +38,8 @@
       <p>{{etape.dureee}} min</p>
       <p>{{etape.descriptione}}</p>
       <br>
+    {% else %}
+      <p>Aucune étape</p>
     {% endfor %}
   </div>
 
