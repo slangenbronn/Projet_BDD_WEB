@@ -12,35 +12,33 @@
 {% block content %}
 
 <form method="post" class="form-signin">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     <div class="login-container">
         <h1>Creer votre recette</h1><br>
         <form>
-            <label for="Nom de la recette"></label>
+            <label for="name">Nom de la recette</label>
             <input type="text" id="name" name="_name" value="" required="required" />
-            <label for="Description"></label>
-            <input type="text" id="name" name="_name" value="" required="required" />
-            <label for="Nom de la recette"></label>
-            <input type="text" id="name" name="_name" value="" required="required" />
-            <label for="password"></label>
-            <input type="password" id="password" name="_password" required="required" />
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            <label for="desc">Description</label>
+            <input type="text" id="desc" name="_desc" value="" required="required" />
+            <label for="nbpers">Nombre de personnes</label>
+            <input type="number" id="nbpers" name="_nbpers" value="" required="required" />
+            <br>
+            <br>
+            <label for="duree">Durée de préparation (en min)</label>
+            <input type="number" id="duree" name="_duree" value="" required="required" />
+            <br>
+            <br>
+            <label for="form_difficulte">Difficulté</label>
+            <br>
+            <select id="form_difficulte" name="form[difficulte]">
+              <option value="1" selected="selected">Très facile</option>
+              <option value="2">Facile</option>
+              <option value="3">Moyen</option>
+              <option value="4">Difficile</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Enregistrer" />
         </form>
-        <div class="login-help">
-            <a href="{{ path('fos_user_registration_register') }}">Register</a> - <a href="{{ path('fos_user_resetting_request') }}">Forgot Password</a>
-        </div>
     </div>
 </form>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1> Creer une recette</h1>
-    </div>
-  </div>
-  <div class="well">
-  {{ form(form) }}
-</div>
 {% endblock content %}
