@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Recette
  *
- * @ORM\Table(name="recette", uniqueConstraints={@ORM\UniqueConstraint(name="idrecette", columns={"idrecette"}), @ORM\UniqueConstraint(name="idrecette_3", columns={"idrecette"})}, indexes={@ORM\Index(name="FK_recette_login", columns={"login"}), @ORM\Index(name="idrecette_2", columns={"idrecette"})})
+ * @ORM\Table(name="recette", uniqueConstraints={@ORM\UniqueConstraint(name="idrecette", columns={"idrecette"}), @ORM\UniqueConstraint(name="idrecette_3", columns={"idrecette"})}, indexes={@ORM\Index(name="FK_recette_id", columns={"id"}), @ORM\Index(name="idrecette_2", columns={"idrecette"})})
  * @ORM\Entity
  */
 class Recette
@@ -101,9 +101,9 @@ class Recette
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      */
-    private $login;
+    private $id;
 
 
 
@@ -382,26 +382,26 @@ class Recette
     }
 
     /**
-     * Set login
+     * Set Id
      *
-     * @param string $login
+     * @param integer $id
      *
      * @return Recette
      */
-    public function setLogin($login)
+    public function setId($id)
     {
-        $this->login = $login;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get login
+     * Get Id
      *
-     * @return string
+     * @return integer
      */
-    public function getLogin()
+    public function getId()
     {
-        return $this->login;
+        return $this->id;
     }
 }

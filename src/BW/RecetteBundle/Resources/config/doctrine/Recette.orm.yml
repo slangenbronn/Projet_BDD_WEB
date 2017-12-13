@@ -2,9 +2,9 @@ BW\RecetteBundle\Entity\Recette:
     type: entity
     table: recette
     indexes:
-        FK_recette_login:
+        FK_recette_id:
             columns:
-                - login
+                - id
         idrecette_2:
             columns:
                 - idrecette
@@ -83,10 +83,9 @@ BW\RecetteBundle\Entity\Recette:
             nullable: true
             options:
                 unsigned: false
-        login:
-            type: string
+        id:
+            type: integer
             nullable: true
-            length: 25
             options:
-                fixed: false
+                unsigned: false
     lifecycleCallbacks: {  }

@@ -68,11 +68,17 @@ class RecetteController extends Controller
     $Imagerepository = $this->getDoctrine()
       ->getRepository('BWRecetteBundle:Image')
     ;
+
+    $Utilisateurrepositor = $this->getDoctrine()
+      ->getRepository('BWUtilisateurBundle:Utilisateur')
+    ;
+
     $liste_id = array();
     $recette = $Recetterepository->find($idRecette);
     $etape = $Etaperepository->findBy(array('idrecette' => $idRecette));
     $quantite = $Quantiterepository->findBy(array('idrecette' => $idRecette));
     $image = $Imagerepository->findOneBy(array('idrecette' => $idRecette));
+    $user = $Utilisateurrepositor->findOneBy(array('id' => $recette->getId()));
 
     foreach($quantite as $l){
       $liste_id[] = $l->getIdingredient();
@@ -88,7 +94,8 @@ class RecetteController extends Controller
       'quantite' => $quantite,
       'l_ing' => $liste_ing,
       'count' => $count,
-      'image' => $image));
+      'image' => $image,
+      'user' => $user));
   }
 
   public function creerAction(Request $request)
