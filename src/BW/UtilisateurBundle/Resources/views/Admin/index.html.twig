@@ -15,40 +15,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>Bienvenu administrateur</h1>
-			{% if tabUti is not null %}
-				<table id="tableau">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Username</th>
-							<th>Prenom</th>
-							<th>Nom</th>
-							<th>Rôle</th>
-							<th>Modifier</th>
-							<th>Supprimer</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for utilisateur in tabUti %}
-							<tr>
-								<td>{{utilisateur.id}}</td>
-								<td>{{utilisateur.username }}</td>
-								<td>{{utilisateur.prenom }}</td>
-								<td>{{utilisateur.nom}}</td>
-								<td>
-									{% for role in utilisateur.roles %}
-										{{role}}{% if not loop.last %},{% endif %}
-									{% endfor %}
-								</td>
-								<td><button onclick="redirect('{{path('bw_admin_modifier_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Modifier</button></td>
-								<td><button onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Supprimer</button></td>
-							</tr>
-						{% endfor %}
-					</tbody>	
-				</table>
-			{% else %}
-				<p>Aucun utilisateur dans la base de données</p>
-			{% endif %}
+
+			<button onclick="redirect('{{ path('bw_admin_tableau_uti') }}')" class="w3-button w3-white width-100">Administrer les utilisateurs</button>
+			<button class="w3-button w3-white width-100">Administrer les recettes</button>
+			<button class="w3-button w3-white width-100">Administrer les avions</button>
+			<button class="w3-button w3-white width-100">Administrer les ingrédients</button>
 		</div>
 	</div>
 </div>

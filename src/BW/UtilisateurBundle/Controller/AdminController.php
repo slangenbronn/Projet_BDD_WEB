@@ -8,12 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminController extends Controller
 {
 	public function indexAction(){
-		$em = $this->getDoctrine()->getManager();
-		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
-
-
-		$tabUtilisateur = $utilisateurRepository->findAll();
-        return $this->render('BWUtilisateurBundle:Admin:index.html.twig', array('tabUti' => $tabUtilisateur));
+        return $this->render('BWUtilisateurBundle:Admin:index.html.twig');
     }
 
     public function modifierUtilisateurAction($id){
@@ -73,5 +68,14 @@ class AdminController extends Controller
 		$em->flush();
 
 		return $this->redirectToRoute('bw_admin_homepage');
+    }
+
+    public function tableauUtilisateurAction(){
+		$em = $this->getDoctrine()->getManager();
+		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
+
+
+		$tabUtilisateur = $utilisateurRepository->findAll();
+        return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
     }
 }

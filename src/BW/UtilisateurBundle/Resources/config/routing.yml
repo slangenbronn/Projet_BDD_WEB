@@ -6,9 +6,15 @@ bw_admin_homepage:
     path:     /admin
     defaults: { _controller: BWUtilisateurBundle:Admin:index }
 
+bw_admin_tableau_uti:
+    path:     /admin/tableau/utilisateur
+    defaults: { _controller: BWUtilisateurBundle:Admin:tableauUtilisateur }
+
 bw_admin_modifier_uti:
-    path:     /admin/modifier/{id}
+    path:     /admin/modifier/utilisateur/{id}
     defaults: { _controller: BWUtilisateurBundle:Admin:modifierUtilisateur }
+    requirements:
+        id:   \d
 
 bw_admin_modification_uti:
     path:     /admin/modification/utilisateur
