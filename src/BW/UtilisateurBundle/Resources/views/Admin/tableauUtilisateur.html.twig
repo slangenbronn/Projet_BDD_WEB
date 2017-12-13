@@ -1,0 +1,64 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Tableau des utilisateurs</h1>
+			{% if tabUti is not null %}
+				<table id="tableau">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Username</th>
+							<th>Prenom</th>
+							<th>Nom</th>
+							<th>Rôle</th>
+							<th>Modifier</th>
+							<th>Supprimer</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for utilisateur in tabUti %}
+							<tr>
+								<td>{{utilisateur.id}}</td>
+								<td>{{utilisateur.username }}</td>
+								<td>{{utilisateur.prenom }}</td>
+								<td>{{utilisateur.nom}}</td>
+								<td>
+									{% for role in utilisateur.roles %}
+										{{role}}{% if not loop.last %},{% endif %}
+									{% endfor %}
+								</td>
+								<td><button onclick="redirect('{{path('bw_admin_modifier_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Modifier</button></td>
+								<td><button onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')" class="centrer-bouton">Supprimer</button></td>
+							</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			{% else %}
+				<p>Aucun utilisateur dans la base de données</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+	<script src="{{asset('bundles/Utilisateur/js/index.js')}}"></script>
+{% endblock %}
