@@ -17,7 +17,10 @@
         {% block header %}{{ include("::header.html.twig") }}{% endblock %}
         {% block nav %}{% endblock %}
         {% block content %}{% endblock %}
-        {% block footer %}{% endblock %}
+        <footer>
+            <p>Copyright - Tous droits réservés<br />
+            <a href="#">Contact</a></p>
+        </footer>
 
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
         <script src="{{asset('bundles/js/layout.js')}}"></script>
