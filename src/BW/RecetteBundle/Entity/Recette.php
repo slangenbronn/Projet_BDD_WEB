@@ -101,7 +101,7 @@ class Recette
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=true)
      */
     private $id;
 

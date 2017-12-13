@@ -25,13 +25,13 @@ class AdminController extends Controller
     }
 
     public function modificationUtilisateurAction(Request $request){
-    	$id = $request->request->get('_id');
-    	$email = $request->request->get('_email');
+    $id = $request->request->get('_id');
+    $email = $request->request->get('_email');
 		$username = $request->request->get('_username');
 		$nom = $request->request->get('_nom');
 		$prenom = $request->request->get('_prenom');
 
-    	$em = $this->getDoctrine()->getManager();
+    $em = $this->getDoctrine()->getManager();
 		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
 
 		$utilisateur = $utilisateurRepository->find($id);
@@ -40,7 +40,7 @@ class AdminController extends Controller
 		if (is_null($utilisateur)) {
 			 throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
 		}
-		
+
 		$utilisateur->setEmail($email);
 		$utilisateur->setUsername($username);
 		$utilisateur->setNom($nom);

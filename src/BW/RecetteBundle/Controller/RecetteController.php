@@ -5,6 +5,7 @@ namespace BW\RecetteBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use BW\RecetteBundle\Entity\Recette;
+use BW\RecetteBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -100,50 +101,49 @@ class RecetteController extends Controller
 
   public function creerAction(Request $request)
   {
-    // On crée un objet Advert
    $recette = new Recette();
 
-   // On crée le FormBuilder grâce au service form factory
-
-   // On ajoute les champs de l'entité que l'on veut à notre formulaire
-   $form = $this->get('form.factory')->createBuilder(FormType::class, $recette)
-     ->add('nom',      TextType::class)
-     ->add('description',     TextareaType::class)
-     ->add('nombrepersonne',   NumberType::class)
-     ->add('duree',    NumberType::class)
-     ->add('difficulte', ChoiceType::class,array('choices' => array(
-                    '' => null,
-                    'Très facile' => 'Très facile',
-                    'Facile' => 'Facile',
-                    'Moyen' => 'Moyen',
-                    'Difficile' => 'Difficile',
-                ),
-              ))
-     ->add('prix',    NumberType::class)
-     ->add('save',      SubmitType::class)
-     ->getForm()
-   ;
    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
    if($request->isMethod('POST')){
-     $form->handleRequest($request);
-     if ($form->isValid()) {
+
+    $nom = $request->request->get('_name');
+    $description = $request->request->get('_desc');
+		$nombrepersonnes = $request->request->get('_nbpers');
+		$duree = $request->request->get('_duree');
+		$difficulte = $request->request->get('_form');
+    $prix = $request->request->get('_prix');
+
+
         // On enregistre notre objet $advert dans la base de données, par exemple
         $em = $this->getDoctrine()->getManager();
+        $RecetteRepository = $em->getRepository('BWRecetteBundle:Recette');
+        $recette = new Recette();
+        $recette->setNom($nom);
+        $recette->setDescription($description);
+        $recette->setDuree($duree);
+        $recette->setNombrepersonne($nombrepersonnes);
+        $recette->setDifficulte($difficulte);
+        $recette->setPrix($prix);
         $em->persist($recette);
+        $em->flush();
+
+
+        $ImageRepository = $em->getRepository('BWRecetteBundle:Image');
+        $image = new Image();
+        $idrecette = $RecetteRepository->findOneBy(array('nom' => $nom));
+        $image->setIdrecette($idrecette->getIdrecette());
+        $image->setLieni("Image/null.jpg"); //Image par défaut
+        $em->persist($image);
+
         $em->flush();
 
         $request->getSession()->getFlashBag()->add('notice', 'Recette bien enregistrée.');
 
         // On redirige vers la page de visualisation de l'annonce nouvellement créée
         return $this->redirectToRoute('bw_recette_homepage');
-      }
    }
 
-   // On passe la méthode createView() du formulaire à la vue
-   // afin qu'elle puisse afficher le formulaire toute seule
-   return $this->render('BWRecetteBundle:Recette:CreerRecette.html.twig', array(
-     'form' => $form->createView(),
-   ));
+   return $this->render('BWRecetteBundle:Recette:CreerRecette.html.twig');
   }
 }
 

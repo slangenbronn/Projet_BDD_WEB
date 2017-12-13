@@ -20,20 +20,21 @@
             <label for="desc">Description</label>
             <input type="text" id="desc" name="_desc" value="" required="required" />
             <label for="nbpers">Nombre de personnes</label>
-            <input type="number" id="nbpers" name="_nbpers" value="" required="required" />
-            <br>
+            <input type="number" id="nbpers" name="_nbpers" value="" required="required" class="form-control"/>
             <br>
             <label for="duree">Durée de préparation (en min)</label>
-            <input type="number" id="duree" name="_duree" value="" required="required" />
+            <input type="number" id="duree" name="_duree" value="" required="required" class="form-control"/>
             <br>
+            <label for="prix">Prix</label>
+            <input type="number" id="prix" name="_prix" value="" required="required" class="form-control"/>
             <br>
             <label for="form_difficulte">Difficulté</label>
             <br>
-            <select id="form_difficulte" name="form[difficulte]">
-              <option value="1" selected="selected">Très facile</option>
-              <option value="2">Facile</option>
-              <option value="3">Moyen</option>
-              <option value="4">Difficile</option>
+            <select id="form_difficulte" name="_form" class="form-control">
+              <option value="Tres facile" selected="selected">Très facile</option>
+              <option value="Facile">Facile</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Difficile">Difficile</option>
             </select>
             <br>
             <br>
