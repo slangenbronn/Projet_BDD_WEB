@@ -1,6 +1,46 @@
-<html>
-  <h1> Creer une recette</h1>
+{% extends "::layout.html.twig" %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
+    <link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block nav%}
+ {{include ("::nav.html.twig")}}
+{% endblock nav %}
+{% block content %}
+
+<form method="post" class="form-signin">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <div class="login-container">
+        <h1>Creer votre recette</h1><br>
+        <form>
+            <label for="Nom de la recette"></label>
+            <input type="text" id="name" name="_name" value="" required="required" />
+            <label for="Description"></label>
+            <input type="text" id="name" name="_name" value="" required="required" />
+            <label for="Nom de la recette"></label>
+            <input type="text" id="name" name="_name" value="" required="required" />
+            <label for="password"></label>
+            <input type="password" id="password" name="_password" required="required" />
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        </form>
+        <div class="login-help">
+            <a href="{{ path('fos_user_registration_register') }}">Register</a> - <a href="{{ path('fos_user_resetting_request') }}">Forgot Password</a>
+        </div>
+    </div>
+</form>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1> Creer une recette</h1>
+    </div>
+  </div>
   <div class="well">
   {{ form(form) }}
 </div>
-</html>
+{% endblock content %}
