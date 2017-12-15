@@ -16,7 +16,6 @@
       <h1>Recettes</h1>
     </div>
   </div>
-    {{dump(listeRecette)}}
     {% if listeRecette is not null %}
       {% for recette in listeRecette %}
         <a   href="{{ path('bw_recette_id', {'idRecette': recette.id}) }}">

@@ -27,22 +27,6 @@ class RecetteController extends Controller
 
     $listeRecette = $recetteRepository->getListeRecette();
 
-    /*$Imagerepository = $this->getDoctrine()
-      ->getRepository('BWRecetteBundle:Image')
-    ;
-
-    $recette = $Recetterepository->findAll();
-    $image = $Imagerepository->findAll();
-    $liste_i = array();
-    foreach($recette as $r){
-      foreach($image as $i){
-        if($i->getidrecette() == $r->getidrecette())
-          $liste_i[] = $i;
-      }
-    }
-
-    $count = count($recette);*/
-
     return $this->render('BWRecetteBundle:Recette:ListeRecette.html.twig', array(
       'listeRecette' => $listeRecette));
   }
