@@ -17,7 +17,8 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository
 		//'OCPlatformBundle:Advert'
 		$qb = $this->createQueryBuilder('r')
 			->leftjoin('r.images', 'im')
-			->leftjoin('r.utilisateur', 'u');
+			->leftjoin('r.utilisateur', 'u')
+			->addSelect('im');
 
 		return $listeRecette = $qb->getQuery()->getResult();
 	}

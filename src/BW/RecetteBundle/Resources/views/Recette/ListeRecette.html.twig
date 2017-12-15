@@ -16,22 +16,27 @@
       <h1>Recettes</h1>
     </div>
   </div>
-    {% if count > 0 %}
-        {%for i in 0..count-1 %}
-        <a   href="{{ path('bw_recette_id', {'idRecette': recette[i].idRecette}) }}">
+    {{dump(listeRecette)}}
+    {% if listeRecette is not null %}
+      {% for recette in listeRecette %}
+        <a   href="{{ path('bw_recette_id', {'idRecette': recette.id}) }}">
         <div class="w3-row-padding">
           <div class="w3-third w3-container w3-margin-bottom">
-              <img src="{{asset(image[i].lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            {% if recette.images is not empty %}
+              <img src="{{asset(recette.images[0].lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            {% else %}
+              <img src="{{asset('Image/default-place-holder.png')}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            {% endif %}
             <div class="w3-container w3-white">
             </a>
               <br>
-              <p><b>{{recette[i].nom}}</b></p>
-              <p>{{recette[i].description}}</p>
+              <p><b>{{recette.nom}}</b></p>
+              <p>{{recette.description}}</p>
             </div>
           </div>
         </div>
           <br>
-        {% endfor %}
+      {% endfor %}
     {% else %}
       <p>Aucune recette</p>
     {% endif %}
