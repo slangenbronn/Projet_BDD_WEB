@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use BW\RecetteBundle\Entity\Recette;
 use BW\RecetteBundle\Entity\Image;
+use BW\RecetteBundle\Entity\Ingredient;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -61,8 +62,18 @@ class RecetteController extends Controller
   {
     $idUtilisateur = $request->query->get('id');
     $nomi = $request->request->get('_name');
-    $
-    return $this->render('BWRecetteBundle:Recette:creerIngredient.html.twig');
-    //return $this->redirectToRoute('bw_recette_homepage');
+    $mesure = $request->request->get('_mesure');
+
+    $ingredient = new Ingredient();
+
+    $ingredient->setNomi($nomi);
+    $ingredient->setTypemesure($mesure);
+
+    $em = $this->getDoctrine()->getManager();
+
+    $em->persist($ingredient);
+    $em->flush();
+
+    return $this->redirectToRoute('bw_recette_homepage');
   }
 }

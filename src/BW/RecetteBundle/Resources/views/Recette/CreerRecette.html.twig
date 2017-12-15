@@ -40,14 +40,17 @@
             {% if ingredients is not empty %}
             <div class="row">
                 <div class="col-md-9">
-                    <select class="js-example-basic-multiple" name="ing" multiple="multiple" >
-                      <option value="AL">Alabama</option>
-                      <option value="WY">Wyoming</option>
+                    <select class="js-example-basic-multiple" name="ing" multiple="multiple" id="ing" >
+                        {% for ingredient in ingredients %}
+                            <option value="{{ingredient.id}}">{{ingredient.nomi}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button onclick="">Ajouter</button>
+                    <button onclick="ajouterIngredient()" type="button">Ajouter</button>
                 </div>
+            </div>
+            <div id="ListeIngredient">
             </div>
             {% else %}
                 <p>Il n'y a aucun ingrédient dans la base de données</p>
