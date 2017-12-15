@@ -8,6 +8,15 @@ bw_recette_id:
     requirements:
         idRecette: \d+
 
-bw_creer_recette:
-    path:     /Recette/Creer
-    defaults: { _controller: BWRecetteBundle:Recette:creer }
+bw_recette_creer_recette:
+    path:     /creer/recette
+    defaults: { _controller: BWRecetteBundle:Recette:creerRecette }
+
+bw_recette_creer_ingredient:
+    path:     /creer/ingredient
+    defaults: { _controller: BWRecetteBundle:Recette:creerIngredient }
+
+bw_recette_creation_ingredient:
+    path:     /creation/ingredient
+    defaults: { _controller: BWRecetteBundle:Recette:creationIngredient }
+

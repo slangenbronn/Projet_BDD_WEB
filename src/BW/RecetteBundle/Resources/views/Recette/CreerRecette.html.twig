@@ -37,9 +37,32 @@
               <option value="Difficile">Difficile</option>
             </select>
             <br>
+            {% if ingredients is not empty %}
+            <div class="row">
+                <div class="col-md-9">
+                    <select class="js-example-basic-multiple" name="ing" multiple="multiple" >
+                      <option value="AL">Alabama</option>
+                      <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button onclick="">Ajouter</button>
+                </div>
+            </div>
+            {% else %}
+                <p>Il n'y a aucun ingrédient dans la base de données</p>
+            {% endif %}
+            
             <br>
             <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Enregistrer" />
         </form>
     </div>
 </form>
 {% endblock content %}
+
+{% block javascripts %}
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="{{asset('bundles/Recette/js/creerRecette.js')}}"></script>
+{% endblock %}

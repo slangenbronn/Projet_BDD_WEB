@@ -17,21 +17,25 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository
 			->leftjoin('r.utilisateur', 'u')
 			->addSelect('im');
 
-		return $listeRecette = $qb->getQuery()->getResult();
+		return $qb->getQuery()->getResult();
 	}
 
-	public function getDetailsRecette($id){
+	public function getDetailRecette($id){
 		$qb = $this->createQueryBuilder('r')
 			->leftjoin('r.images', 'im')
 			->leftjoin('r.utilisateur', 'u')
+			->leftjoin('r.etapes', 'e')
 			->leftjoin('r.quantites', 'q')
-			->leftjoin('q.ingredient', 'in')
+			->leftjoin('q.ingredient', 'ing')
 			->addSelect('im')
 			->addSelect('q')
-			->addSelect('in');
+			->addSelect('e')
+			->addSelect('ing')
+			->andWhere('r.id = :id')
+            ->setParameter('id', $id);
 
-			//Etape
+			//Manque Etape mais zappé car pas le temps
 
-		return $listeRecette = $qb->getQuery()->getResult();
+		return $qb->getQuery()->getOneOrNullResult();
 	}
 }

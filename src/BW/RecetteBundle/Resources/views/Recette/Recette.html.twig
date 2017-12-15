@@ -1,59 +1,59 @@
 {% extends "::layout.html.twig" %}
+
+{% block title %}Detail recette{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
 {% block nav%}
  {{include ("::nav.html.twig")}}
 {% endblock nav %}
+
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-    <div class="w3-third w3-container w3-margin-bottom">
-    <img src="{{asset(image.lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
-    </div>
-    <h1>{{recette.nom}}</h1>
-    <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
-    {% if user is not null %}
-      <p> Recette de {{user.username}}</p>
-    {% endif %}
-    <p> Prix approximatif : {{recette.prix}} </p>
-    <br>
-    <div class="w3-row-padding">
-    <h2> Les ingrédients : </h2>
-    <div class="w3-row-padding">
-    {% if count > 0 %}
-      {%for i in 0..count-1 %}
-        <p> {{quantite[i].quantiteing}} {{l_ing[i].typemesure}} de {{l_ing[i].nomi}}</p>
-     {% endfor %}
-    {% else %}
-      <p>Aucun ingrédient</p>
-    {% endif %}
-  </div>
-
-    </div>
-    <br>
-    <div class="w3-row-padding">
-    <h2> Les étapes de préparations : </h2>
-    <div class="w3-row-padding">
-    {%for etape in etape %}
-      <h3> Etape {{etape.idetape}}</h3>
-      <p>{{etape.dureee}} min</p>
-      <p>{{etape.descriptione}}</p>
+      <div class="w3-third w3-container w3-margin-bottom">
+        <img src="{{asset(recette.images[0].lieni)}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      </div>
+      <h1>{{recette.nom}}</h1>
+      <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
+      {% if recette.utilisateur is not null %}
+        <p> Recette de {{user.username}}</p>
+      {% endif %}
+      <p> Prix approximatif : {{recette.prix}} </p>
       <br>
-    {% else %}
-      <p>Aucune étape</p>
-    {% endfor %}
-  </div>
-
+      <div class="w3-row-padding">
+        <h2>Les ingrédients :</h2>
+        <div class="w3-row-padding">
+          {% for quantite in recette.quantites %}
+            <p>{{ quantite.quantiteing}} {{quantite.ingredient.typemesure}} {{quantite.ingredient.nomi}}</p>
+          {% else %}
+            <p>Aucun ingrédient</p>
+          {% endfor %}
+        </div>
+      </div>
+      <br>
+      <div class="w3-row-padding">
+        <h2> Les étapes de préparations : </h2>
+        <div class="w3-row-padding">
+          {% for etape in recette.etapes %}
+            <h3> Etape {{etape.idetape}}</h3>
+            <p>{{etape.dureee}} min</p>
+            <p>{{etape.descriptione}}</p>
+            <br>
+          {% else %}
+            <p>Aucun ingrédient</p>
+          {% endfor %}
+        </div>
+      </div>
+      <p>
+        <a href="{{ path('bw_recette_homepage') }}" class="btn btn-default">
+          <i class="glyphicon glyphicon-chevron-left"></i>
+          Retour
+        </a>
+      </p>
     </div>
-
-    <p>
-    <a href="{{ path('bw_recette_homepage') }}" class="btn btn-default">
-      <i class="glyphicon glyphicon-chevron-left"></i>
-      Retour
-    </a>
-  </p>
+  </div>
 </div>
-</div>
-</div>
-
-
-  {% endblock content %}
+{% endblock content %}

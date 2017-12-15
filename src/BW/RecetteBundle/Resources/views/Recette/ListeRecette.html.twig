@@ -18,7 +18,7 @@
   </div>
     {% if listeRecette is not null %}
       {% for recette in listeRecette %}
-        <a   href="{{ path('bw_recette_id', {'idRecette': recette.id}) }}">
+        <a href="{{ path('bw_recette_id', {'idRecette': recette.id}) }}">
         <div class="w3-row-padding">
           <div class="w3-third w3-container w3-margin-bottom">
             {% if recette.images is not empty %}

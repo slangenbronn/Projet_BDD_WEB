@@ -1,0 +1,38 @@
+{% extends "::layout.html.twig" %}
+{% block title %}Créer un ingrédient{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block nav%}
+ {{include ("::nav.html.twig")}}
+{% endblock nav %}
+
+{% block content %}
+<form method="post" class="form-signin" action="{{ path('bw_recette_creation_ingredient', {'id': app.user.id}) }}">
+    <div class="login-container">
+        <h1>Creer votre ingrédient</h1><br>
+        <form>
+            <label for="name">Nom de l'ingrédient</label>
+            <input type="text" id="name" name="_name" value="" required="required" />
+            <label for="desc">Type de mesure</label>
+            <select id="form_difficulte" name="_mesure" class="form-control">
+              <option value="litre" selected="selected">Litre</option>
+              <option value="gramme">Gramme</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Enregistrer" />
+        </form>
+    </div>
+</form>
+{% endblock content %}
+
+{% block javascripts %}
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="{{asset('bundles/Recette/js/creerRecette.js')}}"></script>
+{% endblock %}

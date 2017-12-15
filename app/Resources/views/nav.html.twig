@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-2"><a class="w3-button w3-white width-100" href="{{ path('bw_utilisateur_homepage') }}">Home</a></div>
 			<div class="col-md-2"><a class="w3-button w3-white width-100" href="{{ path('bw_recette_homepage') }}">Recette</a></div>
-			<div class="col-md-2"><a class="w3-button w3-white width-100" href="{{ path('bw_creer_recette') }}">Creer une recette</a></div>
+			<div class="col-md-2"><a class="w3-button w3-white width-100" href="{{ path('bw_recette_creer_recette') }}">Creer une recette</a></div>
 			{% if is_granted("ROLE_ADMIN") %}
 				<div class="col-md-3">
 					{{ include("BWUtilisateurBundle:Nav:adminNav.html.twig") }}

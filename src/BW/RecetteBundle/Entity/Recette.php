@@ -116,6 +116,11 @@ class Recette
     private $quantites;
 
     /**
+     * @ORM\OneToMany(targetEntity="BW\RecetteBundle\Entity\Etape", mappedBy="recette")
+     */
+    private $etapes;
+
+    /**
      * Get id
      *
      * @return int
@@ -405,7 +410,7 @@ class Recette
     {
         $this->images[] = $image;
 
-        $image->setAdvert($this);
+        $image->setRecette($this);
 
         return $this;
     }
@@ -424,7 +429,7 @@ class Recette
     {
         $this->quantites[] = $quantite;
 
-        $quantite->setAdvert($this);
+        $quantite->setRecette($this);
 
         return $this;
     }
@@ -437,6 +442,25 @@ class Recette
     public function getQuantites()
     {
         return $this->quantites;
+    }
+
+        public function addEtape(Etape $etape)
+    {
+        $this->etapes[] = $etape;
+
+        $tape->setRecette($this);
+
+        return $this;
+    }
+
+    public function removeEtape(Etape $etape)
+    {
+        $this->etapes->removeElement($etape);
+    }
+
+    public function getEtapes()
+    {
+        return $this->etapes;
     }
 }
 
