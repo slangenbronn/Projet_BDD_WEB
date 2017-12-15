@@ -25,13 +25,13 @@ class AdminController extends Controller
     }
 
     public function modificationUtilisateurAction(Request $request){
-    $id = $request->request->get('_id');
-    $email = $request->request->get('_email');
+	    $id = $request->query->get('id');
+	    $email = $request->request->get('_email');
 		$username = $request->request->get('_username');
 		$nom = $request->request->get('_nom');
-		$prenom = $request->request->get('_prenom');
+			$prenom = $request->request->get('_prenom');
 
-    $em = $this->getDoctrine()->getManager();
+	    $em = $this->getDoctrine()->getManager();
 		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
 
 		$utilisateur = $utilisateurRepository->find($id);

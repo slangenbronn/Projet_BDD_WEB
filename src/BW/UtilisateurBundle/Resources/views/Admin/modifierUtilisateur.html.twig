@@ -2,7 +2,6 @@
 
 {% block title %}Accueil administrateur{% endblock %}
 {% block stylesheet %}
-	<link rel="stylesheet" href="{{asset('bundles/css/default.css')}}"/>
 	<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
 	<!-- Select2 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -13,10 +12,10 @@
 {% endblock %}
 
 {% block content %}
-	<div action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post" class="form-signin">
+	<div class="form-signin">
         <div class="login-container">
             <h1>Modification d'un utilisateur</h1><br>
-            <form>
+            <form action="{{ path('bw_admin_modification_uti', {'id': utilisateur.id}) }}" method="post">
            		<label for="id">Id : {{ utilisateur.id }}</label>
            		<input type="text" id="id" name="_id" value="{{ utilisateur.id }}" class="input_disabled", disabled="disabled">
             	<label for="email">Email</label>
@@ -35,7 +34,7 @@
             </form>
             <input type="submit" class="login login-submit" id="_submit" name="_submit" value="Supprimer" onclick="alertSupprimer('{{utilisateur.id}}', '{{utilisateur.username}}', '{{ path('bw_admin_suppression_uti', {'id': utilisateur.id})}}')"/>
         </div>
-    </div>
+    </form>
 {% endblock %}
 
 {% block javascripts %}
