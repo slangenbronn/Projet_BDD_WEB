@@ -7,91 +7,55 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Quantite
  *
- * @ORM\Table(name="quantite", indexes={@ORM\Index(name="FK_quantite_idingredient", columns={"idingredient"})})
- * @ORM\Entity
+ * @ORM\Table(name="quantite")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\QuantiteRepository")
  */
 class Quantite
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idrecette", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idrecette;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="idingredient", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $idingredient;
+    private $id;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="quantiteing", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="quantiteing", type="float", nullable=true)
      */
     private $quantiteing;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="calories", type="integer", nullable=true)
      */
     private $calories;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ingredient;
 
     /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Quantite
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function setIdrecette($idrecette)
-    {
-        $this->idrecette = $idrecette;
-
-        return $this;
-    }
+    private $recette;
 
     /**
-     * Get idrecette
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdrecette()
+    public function getId()
     {
-        return $this->idrecette;
-    }
-
-    /**
-     * Set idingredient
-     *
-     * @param integer $idingredient
-     *
-     * @return Quantite
-     */
-    public function setIdingredient($idingredient)
-    {
-        $this->idingredient = $idingredient;
-
-        return $this;
-    }
-
-    /**
-     * Get idingredient
-     *
-     * @return integer
-     */
-    public function getIdingredient()
-    {
-        return $this->idingredient;
+        return $this->id;
     }
 
     /**
@@ -135,10 +99,34 @@ class Quantite
     /**
      * Get calories
      *
-     * @return integer
+     * @return int
      */
     public function getCalories()
     {
         return $this->calories;
+    }
+
+    public function getIngredient()
+    {
+        return $this->ingredient;
+    }
+
+    public function setIngredient(Ingredient $ingredient)
+    {
+        $this->ingredient = $ingredient;
+
+        return $this;
+    }
+
+    public function getRecette()
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
+
+        return $this;
     }
 }

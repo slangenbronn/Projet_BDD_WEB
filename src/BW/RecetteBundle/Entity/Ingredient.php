@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ingredient
  *
- * @ORM\Table(name="ingredient", uniqueConstraints={@ORM\UniqueConstraint(name="idingredient_2", columns={"idingredient"}), @ORM\UniqueConstraint(name="idingredient_3", columns={"idingredient"})}, indexes={@ORM\Index(name="FK_ingredient_login", columns={"login"}), @ORM\Index(name="idingredient", columns={"idingredient"})})
- * @ORM\Entity
+ * @ORM\Table(name="ingredient")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\IngredientRepository")
  */
 class Ingredient
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idingredient", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idingredient;
+    private $id;
 
     /**
      * @var string
@@ -29,64 +29,67 @@ class Ingredient
     private $nomi;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="dispodefaut", type="integer", nullable=true)
      */
-    private $dispodefaut = '0';
+    private $dispodefaut;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="typemesure", type="string", length=10, nullable=false)
+     * @ORM\Column(name="typemesure", type="string", length=10)
      */
     private $typemesure;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="popularite", type="integer", nullable=true)
      */
     private $popularite;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="sansgluten", type="integer", nullable=true)
      */
-    private $sansgluten = '0';
+    private $sansgluten;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="vegetarienne", type="integer", nullable=true)
      */
-    private $vegetarienne = '0';
+    private $vegetarienne;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="pescetarien", type="integer", nullable=true)
      */
-    private $pescetarien = '0';
+    private $pescetarien;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $login;
-
-
+    private $utilisateur;
 
     /**
-     * Get idingredient
-     *
-     * @return integer
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Categorie")
+     * @ORM\JoinColumn(nullable=true)
      */
-    public function getIdingredient()
+    private $categorie;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        return $this->idingredient;
+        return $this->id;
     }
 
     /**
@@ -130,7 +133,7 @@ class Ingredient
     /**
      * Get dispodefaut
      *
-     * @return integer
+     * @return int
      */
     public function getDispodefaut()
     {
@@ -178,7 +181,7 @@ class Ingredient
     /**
      * Get popularite
      *
-     * @return integer
+     * @return int
      */
     public function getPopularite()
     {
@@ -202,7 +205,7 @@ class Ingredient
     /**
      * Get sansgluten
      *
-     * @return integer
+     * @return int
      */
     public function getSansgluten()
     {
@@ -226,7 +229,7 @@ class Ingredient
     /**
      * Get vegetarienne
      *
-     * @return integer
+     * @return int
      */
     public function getVegetarienne()
     {
@@ -250,34 +253,34 @@ class Ingredient
     /**
      * Get pescetarien
      *
-     * @return integer
+     * @return int
      */
     public function getPescetarien()
     {
         return $this->pescetarien;
     }
 
-    /**
-     * Set login
-     *
-     * @param string $login
-     *
-     * @return Ingredient
-     */
-    public function setLogin($login)
+    public function getUtilisateur()
     {
-        $this->login = $login;
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    /**
-     * Get login
-     *
-     * @return string
-     */
-    public function getLogin()
+    public function getCategorie()
     {
-        return $this->login;
+        return $this->categorie;
+    }
+
+    public function setCategorie(Categorie $categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }

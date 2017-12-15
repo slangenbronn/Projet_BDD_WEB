@@ -7,28 +7,31 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Achat
  *
- * @ORM\Table(name="achat", uniqueConstraints={@ORM\UniqueConstraint(name="idplan_2", columns={"idplan"}), @ORM\UniqueConstraint(name="idplan_3", columns={"idplan"})}, indexes={@ORM\Index(name="FK_achat_idingredient", columns={"idingredient"}), @ORM\Index(name="idplan", columns={"idplan"})})
- * @ORM\Entity
+ * @ORM\Table(name="achat")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\AchatRepository")
  */
 class Achat
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idplan", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idplan;
+    private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idingredient", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Planning")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idingredient;
+    private $planning;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ingredient;
 
     /**
      * @var \DateTime
@@ -37,54 +40,38 @@ class Achat
      */
     private $dateb;
 
-
-
     /**
-     * Set idplan
+     * Get id
      *
-     * @param integer $idplan
-     *
-     * @return Achat
+     * @return int
      */
-    public function setIdplan($idplan)
+    public function getId()
     {
-        $this->idplan = $idplan;
+        return $this->id;
+    }
+
+    public function getPlanning()
+    {
+        return $this->planning;
+    }
+
+    public function setPlanning(Planning $planning)
+    {
+        $this->planning = $planning;
 
         return $this;
     }
 
-    /**
-     * Get idplan
-     *
-     * @return integer
-     */
-    public function getIdplan()
+    public function getIngredient()
     {
-        return $this->idplan;
+        return $this->ingredient;
     }
 
-    /**
-     * Set idingredient
-     *
-     * @param integer $idingredient
-     *
-     * @return Achat
-     */
-    public function setIdingredient($idingredient)
+    public function setIngredient(Ingredient $ingredient)
     {
-        $this->idingredient = $idingredient;
+        $this->ingredient = $ingredient;
 
         return $this;
-    }
-
-    /**
-     * Get idingredient
-     *
-     * @return integer
-     */
-    public function getIdingredient()
-    {
-        return $this->idingredient;
     }
 
     /**
@@ -111,3 +98,4 @@ class Achat
         return $this->dateb;
     }
 }
+

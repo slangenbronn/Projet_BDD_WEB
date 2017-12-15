@@ -7,24 +7,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categorie
  *
- * @ORM\Table(name="categorie", uniqueConstraints={@ORM\UniqueConstraint(name="nomc", columns={"nomc"}), @ORM\UniqueConstraint(name="idcat_2", columns={"idcat"}), @ORM\UniqueConstraint(name="IndexCat", columns={"idcat"}), @ORM\UniqueConstraint(name="idcat_3", columns={"idcat"})}, indexes={@ORM\Index(name="idcat", columns={"idcat"})})
- * @ORM\Entity
+ * @ORM\Table(name="categorie")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\CategorieRepository")
  */
 class Categorie
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idcat", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idcat;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nomc", type="string", length=25, nullable=false)
+     * @ORM\Column(name="nomc", type="string", length=25)
      */
     private $nomc;
 
@@ -36,15 +36,14 @@ class Categorie
     private $descriptionc;
 
 
-
     /**
-     * Get idcat
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdcat()
+    public function getId()
     {
-        return $this->idcat;
+        return $this->id;
     }
 
     /**
@@ -95,3 +94,4 @@ class Categorie
         return $this->descriptionc;
     }
 }
+

@@ -7,76 +7,64 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Suit
  *
- * @ORM\Table(name="suit", indexes={@ORM\Index(name="FK_suit_login", columns={"login"})})
- * @ORM\Entity
+ * @ORM\Table(name="suit")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\SuitRepository")
  */
 class Suit
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idregime", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idregime;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=25, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="BW\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $login;
-
-
+    private $utilisateur;
 
     /**
-     * Set idregime
-     *
-     * @param integer $idregime
-     *
-     * @return Suit
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Regime")
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function setIdregime($idregime)
+    private $regime;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        $this->idregime = $idregime;
+        return $this->id;
+    }
+
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    /**
-     * Get idregime
-     *
-     * @return integer
-     */
-    public function getIdregime()
+    public function getRegime()
     {
-        return $this->idregime;
+        return $this->regime;
     }
 
-    /**
-     * Set login
-     *
-     * @param string $login
-     *
-     * @return Suit
-     */
-    public function setLogin($login)
+    public function setRegime(Regime $regime)
     {
-        $this->login = $login;
+        $this->Regime = $regime;
 
         return $this;
-    }
-
-    /**
-     * Get login
-     *
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
     }
 }
+

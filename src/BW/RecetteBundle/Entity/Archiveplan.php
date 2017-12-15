@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Archiveplan
  *
- * @ORM\Table(name="archiveplan", uniqueConstraints={@ORM\UniqueConstraint(name="idarchivplan", columns={"idarchivplan"})}, indexes={@ORM\Index(name="FK_archivplan_login", columns={"login"}), @ORM\Index(name="FK_archivplan_idrecette", columns={"idrecette"})})
- * @ORM\Entity
+ * @ORM\Table(name="archiveplan")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\ArchiveplanRepository")
  */
 class Archiveplan
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idarchivplan", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idarchivplan;
+    private $id;
 
     /**
      * @var \DateTime
@@ -28,30 +28,27 @@ class Archiveplan
      */
     private $dateap;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="idrecette", type="integer", nullable=true)
-     */
-    private $idrecette;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $login;
-
-
+    private $recette;
 
     /**
-     * Get idarchivplan
-     *
-     * @return integer
+     * @ORM\ManyToOne(targetEntity="BW\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    public function getIdarchivplan()
+    private $utilisateur;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        return $this->idarchivplan;
+        return $this->id;
     }
 
     /**
@@ -78,51 +75,28 @@ class Archiveplan
         return $this->dateap;
     }
 
-    /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Archiveplan
-     */
-    public function setIdrecette($idrecette)
+    public function getRecette()
     {
-        $this->idrecette = $idrecette;
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
 
         return $this;
     }
 
-    /**
-     * Get idrecette
-     *
-     * @return integer
-     */
-    public function getIdrecette()
+    public function getUtilisateur()
     {
-        return $this->idrecette;
+        return $this->utilisateur;
     }
 
-    /**
-     * Set login
-     *
-     * @param string $login
-     *
-     * @return Archiveplan
-     */
-    public function setLogin($login)
+    public function setUtilisateur(Utilisateur $utilisateur)
     {
-        $this->login = $login;
+        $this->utilisateur = $utilisateur;
 
         return $this;
-    }
-
-    /**
-     * Get login
-     *
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
     }
 }
+

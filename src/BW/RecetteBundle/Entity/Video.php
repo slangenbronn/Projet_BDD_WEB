@@ -7,44 +7,42 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Video
  *
- * @ORM\Table(name="video", uniqueConstraints={@ORM\UniqueConstraint(name="idvideo_2", columns={"idvideo"})}, indexes={@ORM\Index(name="FK_video_idrecette", columns={"idrecette"}), @ORM\Index(name="idvideo", columns={"idvideo"})})
- * @ORM\Entity
+ * @ORM\Table(name="video")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\VideoRepository")
  */
 class Video
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idvideo", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idvideo;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lienv", type="string", length=250, nullable=true)
+     * @ORM\Column(name="lienv", type="string", length=250)
      */
     private $lienv;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idrecette", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $idrecette;
-
+    private $recette;
 
 
     /**
-     * Get idvideo
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdvideo()
+    public function getId()
     {
-        return $this->idvideo;
+        return $this->id;
     }
 
     /**
@@ -71,27 +69,16 @@ class Video
         return $this->lienv;
     }
 
-    /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Video
-     */
-    public function setIdrecette($idrecette)
+    public function getRecette()
     {
-        $this->idrecette = $idrecette;
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
 
         return $this;
     }
-
-    /**
-     * Get idrecette
-     *
-     * @return integer
-     */
-    public function getIdrecette()
-    {
-        return $this->idrecette;
-    }
 }
+

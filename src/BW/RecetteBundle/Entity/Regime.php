@@ -7,24 +7,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Regime
  *
- * @ORM\Table(name="regime", uniqueConstraints={@ORM\UniqueConstraint(name="nomr", columns={"nomr"}), @ORM\UniqueConstraint(name="idregime_2", columns={"idregime"})}, indexes={@ORM\Index(name="idregime", columns={"idregime"})})
- * @ORM\Entity
+ * @ORM\Table(name="regime")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\RegimeRepository")
  */
 class Regime
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idregime", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idregime;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nomr", type="string", length=25, nullable=false)
+     * @ORM\Column(name="nomr", type="string", length=25)
      */
     private $nomr;
 
@@ -35,16 +35,19 @@ class Regime
      */
     private $descriptionr;
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="BW\RecetteBundle\Entity\Recette", cascade={"persist"})
+     */
+    private $recette;
 
     /**
-     * Get idregime
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdregime()
+    public function getId()
     {
-        return $this->idregime;
+        return $this->id;
     }
 
     /**
@@ -93,5 +96,17 @@ class Regime
     public function getDescriptionr()
     {
         return $this->descriptionr;
+    }
+
+    public function getRecette()
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
+
+        return $this;
     }
 }

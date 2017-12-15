@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Image
  *
- * @ORM\Table(name="image", uniqueConstraints={@ORM\UniqueConstraint(name="idimage_2", columns={"idimage"}), @ORM\UniqueConstraint(name="idimage_3", columns={"idimage"})}, indexes={@ORM\Index(name="FK_image_idrecette", columns={"idrecette"}), @ORM\Index(name="idimage", columns={"idimage"})})
- * @ORM\Entity
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\ImageRepository")
  */
 class Image
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idimage", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idimage;
+    private $id;
 
     /**
      * @var string
@@ -29,22 +29,19 @@ class Image
     private $lieni;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idrecette", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $idrecette;
-
-
+    private $recette;
 
     /**
-     * Get idimage
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdimage()
+    public function getId()
     {
-        return $this->idimage;
+        return $this->id;
     }
 
     /**
@@ -71,27 +68,16 @@ class Image
         return $this->lieni;
     }
 
-    /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Image
-     */
-    public function setIdrecette($idrecette)
+    public function getRecette()
     {
-        $this->idrecette = $idrecette;
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
 
         return $this;
     }
-
-    /**
-     * Get idrecette
-     *
-     * @return integer
-     */
-    public function getIdrecette()
-    {
-        return $this->idrecette;
-    }
 }
+

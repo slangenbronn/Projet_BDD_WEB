@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Recette
  *
- * @ORM\Table(name="recette", uniqueConstraints={@ORM\UniqueConstraint(name="idrecette", columns={"idrecette"}), @ORM\UniqueConstraint(name="idrecette_3", columns={"idrecette"})}, indexes={@ORM\Index(name="FK_recette_id", columns={"id"}), @ORM\Index(name="idrecette_2", columns={"idrecette"})})
- * @ORM\Entity
+ * @ORM\Table(name="recette")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\RecetteRepository")
  */
 class Recette
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idrecette", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idrecette;
+    private $id;
 
     /**
      * @var string
@@ -31,90 +31,87 @@ class Recette
     /**
      * @var string
      *
-     * @ORM\Column(name="difficulte", type="string", length=25, nullable=false)
+     * @ORM\Column(name="difficulte", type="string", length=250)
      */
     private $difficulte;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="prix", type="integer", nullable=false)
+     * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="nombrepersonne", type="integer", nullable=false)
+     * @ORM\Column(name="nombrepersonne", type="integer")
      */
     private $nombrepersonne;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="duree", type="integer", nullable=false)
+     * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=25, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=25)
      */
     private $nom;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="calories", type="integer", nullable=true)
      */
     private $calories;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="glucide", type="integer", nullable=true)
      */
     private $glucide;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="lipide", type="integer", nullable=true)
      */
     private $lipide;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="proteines", type="integer", nullable=true)
      */
     private $proteines;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="selmineraux", type="integer", nullable=true)
      */
     private $selmineraux;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $id;
-
-
+    private $utilisateur;
 
     /**
-     * Get idrecette
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdrecette()
+    public function getId()
     {
-        return $this->idrecette;
+        return $this->id;
     }
 
     /**
@@ -182,7 +179,7 @@ class Recette
     /**
      * Get prix
      *
-     * @return integer
+     * @return int
      */
     public function getPrix()
     {
@@ -206,7 +203,7 @@ class Recette
     /**
      * Get nombrepersonne
      *
-     * @return integer
+     * @return int
      */
     public function getNombrepersonne()
     {
@@ -230,7 +227,7 @@ class Recette
     /**
      * Get duree
      *
-     * @return integer
+     * @return int
      */
     public function getDuree()
     {
@@ -278,7 +275,7 @@ class Recette
     /**
      * Get calories
      *
-     * @return integer
+     * @return int
      */
     public function getCalories()
     {
@@ -302,7 +299,7 @@ class Recette
     /**
      * Get glucide
      *
-     * @return integer
+     * @return int
      */
     public function getGlucide()
     {
@@ -326,7 +323,7 @@ class Recette
     /**
      * Get lipide
      *
-     * @return integer
+     * @return int
      */
     public function getLipide()
     {
@@ -350,7 +347,7 @@ class Recette
     /**
      * Get proteines
      *
-     * @return integer
+     * @return int
      */
     public function getProteines()
     {
@@ -374,34 +371,23 @@ class Recette
     /**
      * Get selmineraux
      *
-     * @return integer
+     * @return int
      */
     public function getSelmineraux()
     {
         return $this->selmineraux;
     }
 
-    /**
-     * Set Id
-     *
-     * @param integer $id
-     *
-     * @return Recette
-     */
-    public function setId($id)
+    public function getUtilisateur()
     {
-        $this->id = $id;
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
-
-    /**
-     * Get Id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
+

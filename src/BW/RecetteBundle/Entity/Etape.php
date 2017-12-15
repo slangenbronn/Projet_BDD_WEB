@@ -7,51 +7,48 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Etape
  *
- * @ORM\Table(name="etape", indexes={@ORM\Index(name="FK_etape_idrecette", columns={"idrecette"}), @ORM\Index(name="idetape", columns={"idetape"})})
- * @ORM\Entity
+ * @ORM\Table(name="etape")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\EtapeRepository")
  */
 class Etape
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idetape", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idetape;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="descriptione", type="string", length=250, nullable=false)
+     * @ORM\Column(name="descriptione", type="string", length=250)
      */
     private $descriptione;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="dureee", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="dureee", type="float", nullable=true)
      */
-    private $dureee = '0';
+    private $dureee;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idrecette", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $idrecette;
-
-
+    private $recette;
 
     /**
-     * Get idetape
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdetape()
+    public function getId()
     {
-        return $this->idetape;
+        return $this->id;
     }
 
     /**
@@ -102,27 +99,16 @@ class Etape
         return $this->dureee;
     }
 
-    /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Etape
-     */
-    public function setIdrecette($idrecette)
+    public function getRecette()
     {
-        $this->idrecette = $idrecette;
+        return $this->recette;
+    }
+
+    public function setRecette(Recette $recette)
+    {
+        $this->recette = $recette;
 
         return $this;
     }
-
-    /**
-     * Get idrecette
-     *
-     * @return integer
-     */
-    public function getIdrecette()
-    {
-        return $this->idrecette;
-    }
 }
+

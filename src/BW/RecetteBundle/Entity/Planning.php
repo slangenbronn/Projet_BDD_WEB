@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Planning
  *
- * @ORM\Table(name="planning", uniqueConstraints={@ORM\UniqueConstraint(name="idplan_2", columns={"idplan"}), @ORM\UniqueConstraint(name="idplan_3", columns={"idplan"})}, indexes={@ORM\Index(name="FK_planning_login", columns={"login"}), @ORM\Index(name="FK_planning_idrecette", columns={"idrecette"}), @ORM\Index(name="idplan", columns={"idplan"})})
- * @ORM\Entity
+ * @ORM\Table(name="planning")
+ * @ORM\Entity(repositoryClass="BW\RecetteBundle\Repository\PlanningRepository")
  */
 class Planning
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="idplan", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idplan;
+    private $id;
 
     /**
      * @var \DateTime
@@ -29,29 +29,25 @@ class Planning
     private $datep;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=25, nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $login;
+    private $utilisateur;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idrecette", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $idrecette;
-
-
+    private $recette;
 
     /**
-     * Get idplan
+     * Get id
      *
-     * @return integer
+     * @return int
      */
-    public function getIdplan()
+    public function getId()
     {
-        return $this->idplan;
+        return $this->id;
     }
 
     /**
@@ -78,51 +74,27 @@ class Planning
         return $this->datep;
     }
 
-    /**
-     * Set login
-     *
-     * @param string $login
-     *
-     * @return Planning
-     */
-    public function setLogin($login)
+    public function getUtilisateur()
     {
-        $this->login = $login;
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
-    /**
-     * Get login
-     *
-     * @return string
-     */
-    public function getLogin()
+        public function getIngredient()
     {
-        return $this->login;
+        return $this->recette;
     }
 
-    /**
-     * Set idrecette
-     *
-     * @param integer $idrecette
-     *
-     * @return Planning
-     */
-    public function setIdrecette($idrecette)
+    public function setIngredient(Recette $recette)
     {
-        $this->idrecette = $idrecette;
+        $this->recette = $recette;
 
         return $this;
-    }
-
-    /**
-     * Get idrecette
-     *
-     * @return integer
-     */
-    public function getIdrecette()
-    {
-        return $this->idrecette;
     }
 }
