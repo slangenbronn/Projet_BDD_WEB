@@ -104,6 +104,17 @@ class Recette
      */
     private $utilisateur;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="BW\RecetteBundle\Entity\Image", mappedBy="recette")
+     */
+    private $images;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BW\RecetteBundle\Entity\Quantite", mappedBy="recette")
+     */
+    private $quantites;
+
     /**
      * Get id
      *
@@ -388,6 +399,44 @@ class Recette
         $this->utilisateur = $utilisateur;
 
         return $this;
+    }
+
+    public function addImage(Image $image)
+    {
+        $this->images[] = $image;
+
+        $image->setAdvert($this);
+
+        return $this;
+    }
+
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function addQuantite(Quantite $quantite)
+    {
+        $this->quantites[] = $quantite;
+
+        $quantite->setAdvert($this);
+
+        return $this;
+    }
+
+    public function removeQuantite(Quantite $quantite)
+    {
+        $this->quantites->removeElement($quantite);
+    }
+
+    public function getQuantites()
+    {
+        return $this->quantites;
     }
 }
 

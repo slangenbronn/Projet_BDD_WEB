@@ -29,7 +29,7 @@ class Image
     private $lieni;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette", inversedBy="recette")
      * @ORM\JoinColumn(nullable=true)
      */
     private $recette;

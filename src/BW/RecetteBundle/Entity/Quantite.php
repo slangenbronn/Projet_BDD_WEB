@@ -43,7 +43,7 @@ class Quantite
     private $ingredient;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette")
+     * @ORM\ManyToOne(targetEntity="BW\RecetteBundle\Entity\Recette", inversedBy="recette")
      * @ORM\JoinColumn(nullable=false)
      */
     private $recette;

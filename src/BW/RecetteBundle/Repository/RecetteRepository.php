@@ -10,4 +10,22 @@ namespace BW\RecetteBundle\Repository;
  */
 class RecetteRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	public function getListeRecette(){
+
+		/*$qb = $this->createQueryBuilder('BWRecetteBundle:Quantite', 'q');*/
+		//'OCPlatformBundle:Advert'
+		$qb = $this->createQueryBuilder('r')
+			->leftjoin('r.images', 'im')
+			->leftjoin('r.utilisateur', 'u');
+
+		return $listeRecette = $qb->getQuery()->getResult();
+	}
+
+	/*
+	$qb = $this->createQueryBuilder('r')
+			->leftjoin('r.images', 'im')
+			->leftjoin('r.utilisateur', 'u')
+			->leftjoin('r.quantites', 'q')
+			->leftjoin('q.ingredient', 'in');*/
 }

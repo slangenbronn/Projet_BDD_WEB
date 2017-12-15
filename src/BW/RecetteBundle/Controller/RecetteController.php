@@ -22,11 +22,12 @@ class RecetteController extends Controller
 {
   public function listeAction()
   {
-    $Recetterepository = $this->getDoctrine()
-      ->getRepository('BWRecetteBundle:Recette')
-    ;
+    $recetteRepository = $this->getDoctrine()
+      ->getRepository('BWRecetteBundle:Recette');
 
-    $Imagerepository = $this->getDoctrine()
+    $listeRecette = $recetteRepository->getListeRecette();
+
+    /*$Imagerepository = $this->getDoctrine()
       ->getRepository('BWRecetteBundle:Image')
     ;
 
@@ -40,17 +41,15 @@ class RecetteController extends Controller
       }
     }
 
-    $count = count($recette);
+    $count = count($recette);*/
 
     return $this->render('BWRecetteBundle:Recette:ListeRecette.html.twig', array(
-      'recette' => $recette,
-      'image' => $liste_i,
-      'count' => $count));
+      'listeRecette' => $listeRecette));
   }
 
   public function detailAction($idRecette)
   {
-    $Recetterepository = $this->getDoctrine()
+    /*$Recetterepository = $this->getDoctrine()
       ->getRepository('BWRecetteBundle:Recette')
     ;
 
@@ -87,7 +86,7 @@ class RecetteController extends Controller
 
     $count = count($liste_id);
 
-    $liste_ing = $Ingredientrepository->findBy(array('idingredient' => $liste_id));
+    $liste_ing = $Ingredientrepository->findBy(array('idingredient' => $liste_id));*/
 
     return $this->render('BWRecetteBundle:Recette:Recette.html.twig', array(
       'recette' => $recette,
@@ -131,7 +130,8 @@ class RecetteController extends Controller
         $ImageRepository = $em->getRepository('BWRecetteBundle:Image');
         $image = new Image();
         $idrecette = $RecetteRepository->findOneBy(array('nom' => $nom));
-        $image->setIdrecette($idrecette->getIdrecette());
+        //$image->setRecette($idrecette->getIdrecette());
+        $image->setRecette($recette);
         $image->setLieni("Image/default-placeholder.png"); //Image par défaut
         $em->persist($image);
 
