@@ -132,7 +132,7 @@ class RecetteController extends Controller
         $image = new Image();
         $idrecette = $RecetteRepository->findOneBy(array('nom' => $nom));
         $image->setIdrecette($idrecette->getIdrecette());
-        $image->setLieni("Image/null.jpg"); //Image par défaut
+        $image->setLieni("Image/default-placeholder.png"); //Image par défaut
         $em->persist($image);
 
         $em->flush();
