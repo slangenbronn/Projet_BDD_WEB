@@ -11,7 +11,7 @@
 {% endblock nav %}
 
 {% block content %}
-<form method="post" class="form-signin">
+<form method="post" class="form-signin" action="{{ path('bw_recette_creation_recette', {'id': app.user.id}) }}">
     <div class="login-container">
         <h1>Creer votre recette</h1><br>
         <form>

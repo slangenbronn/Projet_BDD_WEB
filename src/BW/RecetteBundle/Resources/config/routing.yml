@@ -12,6 +12,10 @@ bw_recette_creer_recette:
     path:     /creer/recette
     defaults: { _controller: BWRecetteBundle:Recette:creerRecette }
 
+bw_recette_creation_recette:
+    path:     /creation/recette
+    defaults: { _controller: BWRecetteBundle:Recette:creationRecette }
+
 bw_recette_creer_ingredient:
     path:     /creer/ingredient
     defaults: { _controller: BWRecetteBundle:Recette:creerIngredient }

@@ -26,12 +26,18 @@ function ajouterIngredient() {
 // Fonction dégueulasse
 function champsIngredient(id, nom) {
 	return "<div id=\'ing" + id + "\'><br><label for=\'name\'>Quantite " + nom + "</label><div class=\'row\'>"
-		+ "<div class=\'col-md-9\'><input type=\'text\' name=\'_ing"+ id + "\' value=\'\' required=\'required\'></div>"
+		+ "<div class=\'col-md-9\'><input type=\'number\' name=\'_ing"+ id + "\' value=\'\' required=\'required\' class=\'form-control\'></div>"
 		+ "<div class=\'col-md-3\'><button onclick=\'supprLigne()\' type=\'button\'>Supprimer</button></div>"
 		+ "</div></div>"
 }
 
+//Marche pas
 function supprLigne(){
+	$(this).parent().parent();
+	console.log($(this));
+	console.log($(this).parents(".row"));
 	// body...
+	// parent
+	//get element
 }
 //Fonction pour ajouter post en tab

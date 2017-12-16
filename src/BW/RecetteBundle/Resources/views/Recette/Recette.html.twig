@@ -19,7 +19,7 @@
       <h1>{{recette.nom}}</h1>
       <h3> Pour {{recette.nombrepersonne}} personne(s)</h3>
       {% if recette.utilisateur is not null %}
-        <p> Recette de {{user.username}}</p>
+        <p> Recette de {{recette.utilisateur.username}}</p>
       {% endif %}
       <p> Prix approximatif : {{recette.prix}} </p>
       <br>
@@ -43,7 +43,7 @@
             <p>{{etape.descriptione}}</p>
             <br>
           {% else %}
-            <p>Aucun ingrédient</p>
+            <p>Aucune étape</p>
           {% endfor %}
         </div>
       </div>

@@ -78,4 +78,22 @@ class AdminController extends Controller
 		$tabUtilisateur = $utilisateurRepository->findAll();
         return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
     }
+
+    public function tableauRecetteAction(){
+		$em = $this->getDoctrine()->getManager();
+		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
+
+
+		$tabUtilisateur = $utilisateurRepository->findAll();
+        return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
+    }
+
+    public function tableauIngredientAction(){
+		$em = $this->getDoctrine()->getManager();
+		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
+
+
+		$tabUtilisateur = $utilisateurRepository->findAll();
+        return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
+    }
 }

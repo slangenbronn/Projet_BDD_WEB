@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use BW\RecetteBundle\Entity\Recette;
 use BW\RecetteBundle\Entity\Image;
 use BW\RecetteBundle\Entity\Ingredient;
+use BW\RecetteBundle\Entity\Quantite;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -51,6 +52,62 @@ class RecetteController extends Controller
     $ingredients = $ingRepository->findAll();
 
     return $this->render('BWRecetteBundle:Recette:CreerRecette.html.twig',array('ingredients' =>  $ingredients));
+  }
+
+  public function creationRecetteAction(Request $request){
+    $em = $this->getDoctrine()->getManager();
+
+    /* Recette */
+    $desc = $request->request->get('_desc');
+    $nom = $request->request->get('_name');
+    $nbPers = $request->request->get('_nbpers');
+    $duree = $request->request->get('_duree');
+    $prix = $request->request->get('_prix');
+    $difficulte = $request->request->get('_form');
+
+    $recette = new Recette();
+    $recette->setNom($nom);
+    $recette->setDescription($desc);
+    $recette->setDuree($duree);
+    $recette->setPrix($prix);
+    $recette->setNombrepersonne($nbPers);
+    $recette->setDifficulte($difficulte);
+    //Ajout l'auteur
+    $utiRepository = $this->getDoctrine()
+      ->getRepository('BWUtilisateurBundle:Utilisateur');
+    $uti = $utiRepository->findOneById($request->query->get('id'));
+    $recette->setUtilisateur($uti);
+
+    $em->persist($recette);
+
+    /* Image */
+    $image = new Image();
+    $image->setRecette($recette);
+    $image->setLieni("Image/default-placeholder.png");
+
+    $em->persist($image);
+
+    /* Quantitite */
+    // Récupere tout les ids d'ingrédient dans la requête poste
+    $all = $request->request->all();
+    $ingredients = array_flip( preg_grep("#_ing#", array_flip($all), 0 ) );
+    $ingRepository = $this->getDoctrine()
+      ->getRepository('BWRecetteBundle:Ingredient');
+    foreach ($ingredients as $ing => $quantite) {
+      $idIng = substr($ing, 4);
+      $ing = $ingRepository->findOneById($idIng);
+
+      $qte = new Quantite();
+      $qte->setQuantiteing($quantite);
+      $qte->setRecette($recette);
+      $qte->setIngredient($ing);
+
+      $em->persist($qte);
+    }
+
+    $em->flush();
+
+    return $this->redirectToRoute('bw_recette_homepage');
   }
 
   public function creerIngredientAction()
