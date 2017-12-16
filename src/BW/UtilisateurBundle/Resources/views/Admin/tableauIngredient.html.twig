@@ -1,0 +1,53 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Tableau des ingredients</h1>
+			{% if tabIngredient is not null %}
+				<table id="tableau">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom</th>
+							<th>Type de mesure</th>
+							<th>Supprimer</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for ingredient in tabIngredient %}
+							<tr>
+								<td>{{ingredient.id}}</td>
+								<td>{{ingredient.nomi}}</td>
+								<td>{{ingredient.typemesure}}</td>
+								<td><button onclick="alertSupprimer('{{ingredient.id}}', '{{ingredient.nomi}}', '{{ path('bw_admin_suppression_ingredient', {'id': ingredient.id})}}')" class="centrer-bouton">Supprimer</button></td>
+							</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			{% else %}
+				<p>Aucun ingredient dans la base de données</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+	<script src="{{asset('bundles/Utilisateur/js/tableauIngredient.js')}}"></script>
+{% endblock %}

@@ -23,3 +23,19 @@ bw_admin_modification_uti:
 bw_admin_suppression_uti:
     path:     /admin/suppression/utilisateur
     defaults: { _controller: BWUtilisateurBundle:Admin:suppressionUtilisateur }
+
+bw_admin_tableau_ingredient:
+    path:     /admin/tableau/ingredient
+    defaults: { _controller: BWUtilisateurBundle:Admin:tableauIngredient }
+
+bw_admin_suppression_ingredient:
+    path:     /admin/suppression/ingredient
+    defaults: { _controller: BWUtilisateurBundle:Admin:suppressionIngredient }
+
+bw_admin_tableau_recette:
+    path:     /admin/tableau/recette
+    defaults: { _controller: BWUtilisateurBundle:Admin:tableauRecette }
+
+bw_admin_suppression_recette:
+    path:     /admin/suppression/recette
+    defaults: { _controller: BWUtilisateurBundle:Admin:suppressionRecette }

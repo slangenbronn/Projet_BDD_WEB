@@ -1,7 +1,7 @@
 function alertSupprimer(id, username, adresse){
 	swal({
 		title: 'Êtes vous sûr ?',
-		text: "L\'utilisateur " + id + " " + username + " disparaîtra totalement",
+		text: "La recette " + id + " " + username + " disparaîtra totalement",
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',

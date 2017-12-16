@@ -16,9 +16,8 @@
 			<h1>Bienvenu administrateur</h1>
 
 			<button onclick="redirect('{{ path('bw_admin_tableau_uti') }}')" class="w3-button w3-white width-100">Administrer les utilisateurs</button>
-			<button class="w3-button w3-white width-100">Administrer les recettes</button>
-			<button class="w3-button w3-white width-100">Administrer les avions</button>
-			<button class="w3-button w3-white width-100">Administrer les ingrédients</button>
+			<button onclick="redirect('{{ path('bw_admin_tableau_recette') }}')"class="w3-button w3-white width-100">Administrer les recettes</button>
+			<button onclick="redirect('{{ path('bw_admin_tableau_ingredient') }}')"class="w3-button w3-white width-100">Administrer les ingrédients</button>
 		</div>
 	</div>
 </div>

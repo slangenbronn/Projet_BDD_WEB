@@ -1,0 +1,63 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('bundles/css/normalize.css')}}"/>
+{% endblock %}
+
+{% block nav %}
+	{{ include("::nav.html.twig") }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Tableau des recettes</h1>
+			{% if tabRecette is not null %}
+				<table id="tableau">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom</th>
+							<th>Description</th>
+							<th>Difficulte</th>
+							<th>Prix</th>
+							<th>Nombre de personne</th>
+							<th>Durée</th>
+							<th>Auteur</th>
+							<th>Supprimer</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for recette in tabRecette %}
+							<tr>
+								<td>{{recette.id}}</td>
+								<td>{{recette.nom }}</td>
+								<td>{{recette.description }}</td>
+								<td>{{recette.difficulte}}</td>
+								<td>{{recette.prix}}</td>
+								<td>{{recette.nombrepersonne}}</td>
+								<td>{{recette.duree}}</td>
+								<td>{{recette.utilisateur}}</td>
+								<td><button onclick="alertSupprimer('{{recette.id}}', '{{recette.nom}}', '{{ path('bw_admin_suppression_recette', {'id': recette.id})}}')" class="centrer-bouton">Supprimer</button></td>
+							</tr>
+						{% endfor %}
+					</tbody>	
+				</table>
+			{% else %}
+				<p>Aucun recette dans la base de données</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+	<!-- sweetAlert2 -->
+	<script src="{{asset('bundles/js/sweetalert2.all.min.js')}}"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+	<script src="{{asset('bundles/Utilisateur/js/tableauRecette.js')}}"></script>
+{% endblock %}

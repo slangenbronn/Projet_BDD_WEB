@@ -81,19 +81,81 @@ class AdminController extends Controller
 
     public function tableauRecetteAction(){
 		$em = $this->getDoctrine()->getManager();
-		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
+		$recetteRepository = $em->getRepository('BWRecetteBundle:Recette');
 
 
-		$tabUtilisateur = $utilisateurRepository->findAll();
-        return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
+		$tabRecette = $recetteRepository->findAll();
+        return $this->render('BWUtilisateurBundle:Admin:tableauRecette.html.twig', array('tabRecette' => $tabRecette));
+    }
+
+    public function suppressionRecetteAction(Request $request){
+    	$id = $request->query->get('id');
+
+    	$em = $this->getDoctrine()->getManager();
+		$recetteRepository = $em->getRepository('BWRecetteBundle:Recette');
+		$recette = $recetteRepository->find($id);
+
+		if (is_null($recette)) {
+			 throw $this->createNotFoundException('La recette n\'existe pas');
+		}
+		// Supprime les entités liés
+		$imageRepository = $em->getRepository('BWRecetteBundle:Image');
+		$images = $imageRepository->findByRecette($recette);
+		foreach ($images as $image) {
+			$em->remove($image);
+		}
+
+		$videoRepository = $em->getRepository('BWRecetteBundle:Video');
+		$videos = $videoRepository->findByRecette($recette);
+		foreach ($videos as $video) {
+			$em->remove($video);
+		}
+
+		$quantiteRepository = $em->getRepository('BWRecetteBundle:Quantite');
+		$quantites = $quantiteRepository->findByRecette($recette);
+		foreach ($quantites as $quantite) {
+			$em->remove($quantite);
+		}
+
+
+		$em->remove($recette);
+		$em->flush();
+
+		return $this->redirectToRoute('bw_admin_homepage');
     }
 
     public function tableauIngredientAction(){
 		$em = $this->getDoctrine()->getManager();
-		$utilisateurRepository = $em->getRepository('BWUtilisateurBundle:Utilisateur');
+		$ingredientRepository = $em->getRepository('BWRecetteBundle:Ingredient');
 
 
-		$tabUtilisateur = $utilisateurRepository->findAll();
-        return $this->render('BWUtilisateurBundle:Admin:tableauUtilisateur.html.twig', array('tabUti' => $tabUtilisateur));
+		$tabIngredient = $ingredientRepository->findAll();
+
+        return $this->render('BWUtilisateurBundle:Admin:tableauIngredient.html.twig', array('tabIngredient' => $tabIngredient));
+    }
+
+    public function suppressionIngredientAction(Request $request){
+    	$id = $request->query->get('id');
+
+    	$em = $this->getDoctrine()->getManager();
+		$ingredientRepository = $em->getRepository('BWRecetteBundle:Ingredient');
+
+		$ingredient = $ingredientRepository->find($id);
+
+		if (is_null($ingredient)) {
+			 throw $this->createNotFoundException('L\'ingrédient n\'existe pas');
+		}
+
+		// Supprime les entités liés
+		$quantiteRepository = $em->getRepository('BWRecetteBundle:Quantite');
+		$quantites = $quantiteRepository->findByIngredient($ingredient);
+		foreach ($quantites as $quantite) {
+			$em->remove($quantite);
+		}
+
+		$em->remove($ingredient);
+		$em->flush();
+
+		return $this->redirectToRoute('bw_admin_homepage');
     }
 }

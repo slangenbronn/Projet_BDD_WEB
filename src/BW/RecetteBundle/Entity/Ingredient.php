@@ -3,7 +3,7 @@
 namespace BW\RecetteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use BW\UtilisateurBundle\Entity\Utilisateur;
 /**
  * Ingredient
  *
