@@ -4,7 +4,7 @@ namespace BW\UtilisateurBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-
+use BW\RecetteBundle\Entity\Ingredient;
 /**
  * @ORM\Entity(repositoryClass="BW\UtilisateurBundle\Repository\UtilisateurRepository")
  * @ORM\Table(name="Utilisateur")
